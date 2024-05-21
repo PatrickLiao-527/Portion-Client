@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Banner from './components/Banner';
+import GlobalStyle from './GlobalStyle';
+import TopSection from './components/TopSection';
+import SignUpModal from './components/SignUpModal';
+import OrderPage from './components/OrderPage';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <GlobalStyle />
+      <div className="App">
+        <Header onSignUpClick={openModal} />
+        {isModalOpen && <SignUpModal onClose={closeModal} />}
+        <Routes>
+          <Route path="/" element={<><TopSection /><Banner /></>} />
+          <Route path="/order" element={<OrderPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

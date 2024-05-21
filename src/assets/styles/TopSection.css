@@ -1,0 +1,172 @@
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(90deg, #78F4BF 0%, #C2EFB7 100%);
+}
+
+.content {
+  flex: 1;
+  max-width: 50%;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 62px;
+  font-weight: bold;
+  color: #302D40;
+  line-height: 1.2;
+  margin-top: 100px;
+  margin-left: 300px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 20px 60px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #302D40;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  margin-left: 300px;
+}
+
+.image-container {
+  position: relative;
+  flex: 1;
+  max-width: 50%;
+}
+
+.meal-image {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+}
+
+.stylistic-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  
+}
+
+.bubble {
+  position: absolute;
+  background: radial-gradient(circle, rgba(252, 248, 243, 0.52), rgba(255, 255, 255, 0.77));
+  border-radius: 50%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  color: #302D40;
+  width: 150px;
+  height: 150px;
+  font-size: 32px;
+  z-index: 2;
+}
+
+.bubble:first-child {
+  bottom: 60%;
+  left: 2%;
+  color: #007AFF; /* Apple blue for Protein */
+}
+
+.bubble:nth-child(2) {
+  top: 20%;
+  right: 40%;
+  color: #34C759; /* Apple green for Carbs */
+}
+
+.bubble:nth-child(3) {
+  bottom: 10%;
+  left: 5%;
+  color: #FF3B30; /* Apple red for Fats */
+}
+
+.bubble-number-container {
+  overflow: hidden;
+  height: 40px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scroll {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: scroll 10s linear infinite;
+}
+
+.scroll li {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+@keyframes scroll {
+  0%, 12.66%, 100% {
+      transform: translate3d(0,0,0);
+  }
+  16.66%, 29.32% {
+      transform: translate3d(0,-25%, 0);
+  }
+  33.32%, 45.98% {
+      transform: translate3d(0,-50%, 0);
+  }
+  49.98%, 62.64% {
+      transform: translate3d(0,-75%, 0);
+  }
+  66.64%, 79.30% {
+      transform: translate3d(0,-50%, 0);
+  }
+  83.30%, 95.96% {
+      transform: translate3d(0,-25%, 0);
+  }
+}
+
+.bubble-text {
+  font-size: 24px;
+}
+
+.decorative-bubble {
+  position: absolute;
+  background: radial-gradient(circle, rgba(252, 248, 243, 0.52), rgba(255, 255, 255, 0.77));
+  border-radius: 50%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.decorative-bubble.small {
+  width: 60px;
+  height: 60px;
+}
+
+.decorative-bubble.medium {
+  width: 100px;
+  height: 100px;
+}
+
+.decorative-bubble.large {
+  width: 140px;
+  height: 140px;
+}

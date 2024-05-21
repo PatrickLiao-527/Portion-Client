@@ -1,0 +1,26 @@
+.order-header-wrapper {
+    width: 1279px;
+    height: 161px;
+    background: linear-gradient(90deg, #78F4BF 0%, #C2EFB7 100%);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .order-header-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 8px;
+  }
+  
+  .order-header-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: #333333;
+  }
+  
