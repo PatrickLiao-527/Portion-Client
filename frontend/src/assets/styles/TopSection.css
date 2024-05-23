@@ -70,28 +70,37 @@
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   color: #302D40;
-  width: 150px;
-  height: 150px;
   font-size: 32px;
   z-index: 2;
 }
 
 .bubble:first-child {
   bottom: 60%;
-  left: 2%;
-  color: #007AFF; /* Apple blue for Protein */
+  right: 35%;
+  width: 250px;
+  height: 250px;
+  color: #302D40; 
 }
 
 .bubble:nth-child(2) {
-  top: 20%;
-  right: 40%;
-  color: #34C759; /* Apple green for Carbs */
+  bottom: 2%;
+  left: 4%;
+  width: 200px;
+  height: 200px;
+  color: #302D40; 
 }
 
 .bubble:nth-child(3) {
-  bottom: 10%;
-  left: 5%;
-  color: #FF3B30; /* Apple red for Fats */
+  bottom: 0%;
+  left: 30%;
+  width: 135px;
+  height: 135px;
+  color: #302D40; 
+}
+
+.bubble-number-unit-container {
+  display: flex;
+  align-items: center;
 }
 
 .bubble-number-container {
@@ -102,6 +111,11 @@
   align-items: center;
 }
 
+.unit {
+  font-size: 32px;
+  font-weight: bold;
+  margin-left: 5px; /* Adjust spacing as needed */
+}
 .scroll {
   list-style: none;
   padding: 0;
@@ -157,16 +171,19 @@
 }
 
 .decorative-bubble.small {
-  width: 60px;
-  height: 60px;
+  width: 25px;
+  height: 25px;
 }
 
 .decorative-bubble.medium {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
 
 .decorative-bubble.large {
   width: 140px;
   height: 140px;
+}
+.bubble:nth-child(3) .scroll li {
+  margin-left: 10px; /* Add margin-left to adjust single digit alignment */
 }

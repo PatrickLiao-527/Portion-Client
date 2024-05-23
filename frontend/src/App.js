@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Banner from './components/Banner';
 import GlobalStyle from './GlobalStyle';
-import TopSection from './components/TopSection';
 import SignUpModal from './components/SignUpModal';
 import OrderPage from './components/OrderPage';
+import HomePage from './components/HomePage';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +20,7 @@ function App() {
         <Header onSignUpClick={openModal} />
         {isModalOpen && <SignUpModal onClose={closeModal} />}
         <Routes>
-          <Route path="/" element={<><TopSection /><Banner /></>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/order" element={<OrderPage />} />
         </Routes>
       </div>
