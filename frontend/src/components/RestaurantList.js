@@ -1,17 +1,21 @@
 // src/components/RestaurantList.js
 import React from 'react';
 import '../assets/styles/RestaurantList.css';
-import restaurantImage from '../assets/images/CAVA-food.png';
+import sampleRestaurantImage from '../assets/images/CAVA-food.png'; // Correct image path
 
-const RestaurantList = ({ restaurants }) => {
+const RestaurantList = ({ restaurants, onRestaurantClick }) => {
   return (
-    <div className="restaurant-list-container">
+    <div className="restaurant-list">
       {restaurants.map((restaurant, index) => (
-        <div key={index} className="restaurant-card">
-          <img src={restaurantImage} alt={restaurant.name} className="restaurant-image" />
-          <div className="restaurant-info">
-            <div className="restaurant-name">{restaurant.name}</div>
-            <div className="restaurant-type">{restaurant.type}</div>
+        <div
+          key={index}
+          className="restaurant-item"
+          onClick={() => onRestaurantClick(restaurant)}
+        >
+          <img src={sampleRestaurantImage} alt={restaurant.name} className="restaurant-image" />
+          <div className="restaurant-details">
+            <h3 className="restaurant-name">{restaurant.name}</h3>
+            <p className="restaurant-type">{restaurant.type}</p>
           </div>
         </div>
       ))}

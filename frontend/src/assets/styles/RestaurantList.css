@@ -1,43 +1,46 @@
 /* src/assets/styles/RestaurantList.css */
-.restaurant-list-container {
+
+.restaurant-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: flex-start; /* Align to the start */
-  width: 100%; /* Ensure the container uses full width */
+  padding-top: 20px;
 }
 
-.restaurant-card {
-  flex: 0 1 calc(33.333% - 20px); /* Ensure three cards per row with gaps */
-  border-radius: 10px;
-  overflow: hidden;
+.restaurant-item {
   display: flex;
   flex-direction: column;
-  margin: 10px 0; /* Margin only on top and bottom to prevent additional horizontal gaps */
+  width: 353px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.restaurant-item:hover {
+  transform: scale(1.05);
 }
 
 .restaurant-image {
-  width: 100%;
-  height: 200px;
+  width: 353px;
+  height: 255px;
   object-fit: cover;
-  border-radius: 10px 10px 0 0; /* Rounded corners at the top */
+    border-radius: 10px;
 }
 
-.restaurant-info {
-  padding: 10px; 
-  font-family: 'Poppins', sans-serif;
-  text-align: left; /* Align text to the start */
+.restaurant-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .restaurant-name {
-  font-size: 22px;
-  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
   color: #302D40;
-  margin-bottom: 5px;
 }
 
 .restaurant-type {
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #7D7D7D;
 }

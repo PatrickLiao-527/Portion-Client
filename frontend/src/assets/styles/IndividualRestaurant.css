@@ -1,0 +1,204 @@
+.individual-restaurant-card {
+    border: 1px solid black;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .individual-restaurant-header {
+    background-size: cover;
+    background-position: center;
+    height: 180px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(to bottom, rgba(252, 248, 243, 0.4) 23%, rgba(252, 248, 243, 1) 100%);
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .restaurant-title {
+    position: absolute;
+    bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    color: #302D40;
+  }
+  
+  .individual-restaurant-content {
+    padding: 20px;
+  }
+  
+  .food-item {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px 0;
+    background: #FFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .restaurant-food-image {
+    width: 214px;
+    height: 148px;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .food-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    padding-left: 20px;
+  }
+  
+  .food-texts-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+  }
+  
+  .food-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: #302D40;
+    margin-bottom: 5px;
+  }
+  
+  .food-price {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #302D40;
+    margin-bottom: 5px;
+  }
+  
+  .food-calories,
+  .food-ingredients {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #302D40;
+    margin-bottom: 5px;
+  }
+  
+  .cart-icon-container {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #302D40;
+    height: 99%;
+    border-radius: 10px;
+    width: 73px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .put-in-cart-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .down-arrow-icon {
+    position: absolute;
+    top: 100px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    transition: transform 0.3s;
+  }
+  
+  .cart-icon-container:hover .down-arrow-icon {
+    animation: bounce 1s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-13px);
+    }
+  }
+  
+  .macronutrients-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-left: 50px;
+  }
+  
+  .macronutrients {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .macro-title-column,
+  .macro-value-column,
+  .macro-additional-column,
+  .macro-controls-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .macro-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .macro-title,
+  .macro-additional,
+  .macro-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #302D40;
+  }
+  
+  .macro-controls {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .macro-controls button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 10px;
+  }
+  
+  .macro-additional-value,
+  .macro-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    padding: 0 10px;
+    background: #F9F9F9;
+    border: 1px solid #EAEAEA;
+    border-radius: 4px;
+  }
+  
