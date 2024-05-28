@@ -1,30 +1,56 @@
+/* TopSection.css */
 .top-section {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   background: linear-gradient(90deg, #78F4BF 0%, #C2EFB7 100%);
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 601px) {
+  .top-section {
+    flex-direction: row;
+    padding: 4rem 2rem;
+  }
 }
 
 .content {
   flex: 1;
-  max-width: 50%;
+  max-width: 100%;
+  text-align: center; /* Center text for mobile */
+}
+
+@media (min-width: 601px) {
+  .content {
+    text-align: left; /* Align text to the left for desktop */
+    margin-right: 2rem; /* Move content closer to the center */
+    margin-left: auto; /* Center content for desktop */
+  }
 }
 
 .title {
   font-family: 'Poppins', sans-serif;
-  font-size: 62px;
+  font-size: 2rem;
   font-weight: bold;
   color: #302D40;
   line-height: 1.2;
-  margin-top: 100px;
-  margin-left: 300px;
+  margin: 2rem 0;
+}
+
+@media (min-width: 601px) {
+  .title {
+    position: relative;
+    font-size: 3.5rem; /* Increase font size for desktop */
+    left:30%;
+    top: 20%;
+  }
 }
 
 .cta-button {
   display: inline-block;
-  padding: 20px 60px;
+  padding: 1rem 3rem;
   font-family: 'Poppins', sans-serif;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
   background-color: #302D40;
@@ -32,14 +58,26 @@
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
-  margin-left: 300px;
+  margin: 1rem 0;
+  position: relative; 
+  left:30%;
+  top: 30%;
+  
 }
+
+@media (max-width: 600px) {
+  .cta-button {
+    font-size: 1.25rem; /* Reduce font size for mobile */
+    padding: 0.75rem 2rem; /* Adjust padding for mobile */
+    left: 0%;
+  }
+}
+
 
 .image-container {
   position: relative;
   flex: 1;
-  max-width: 50%;
+  max-width: 100%;
 }
 
 .meal-image {
@@ -55,8 +93,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  
 }
+
 
 .bubble {
   position: absolute;
@@ -70,32 +108,56 @@
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   color: #302D40;
-  font-size: 32px;
+  font-size: 1rem;
   z-index: 2;
+}
+
+@media (min-width: 601px) {
+  .bubble {
+    font-size: 1.5rem; /* Increase font size for desktop */
+  }
 }
 
 .bubble:first-child {
   bottom: 60%;
   right: 35%;
-  width: 250px;
-  height: 250px;
-  color: #302D40; 
+  width: 150px;
+  height: 150px;
+}
+
+@media (min-width: 601px) {
+  .bubble:first-child {
+    width: 250px;
+    height: 250px; /* Increase size for desktop */
+  }
 }
 
 .bubble:nth-child(2) {
   bottom: 2%;
   left: 4%;
-  width: 200px;
-  height: 200px;
-  color: #302D40; 
+  width: 120px;
+  height: 120px;
+}
+
+@media (min-width: 601px) {
+  .bubble:nth-child(2) {
+    width: 200px;
+    height: 200px; /* Increase size for desktop */
+  }
 }
 
 .bubble:nth-child(3) {
   bottom: 0%;
   left: 30%;
-  width: 135px;
-  height: 135px;
-  color: #302D40; 
+  width: 100px;
+  height: 100px;
+}
+
+@media (min-width: 601px) {
+  .bubble:nth-child(3) {
+    width: 135px;
+    height: 135px; /* Increase size for desktop */
+  }
 }
 
 .bubble-number-unit-container {
@@ -105,17 +167,27 @@
 
 .bubble-number-container {
   overflow: hidden;
-  height: 40px; 
+  height: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .unit {
-  font-size: 32px;
+  font-size: 0.9rem;
   font-weight: bold;
   margin-left: 5px; /* Adjust spacing as needed */
+  margin-bottom: 0px;
 }
+
+@media (min-width: 601px) {
+  .unit {
+    font-size: 1.5rem; /* Increase font size for desktop */
+    margin-left: 5px; /* Adjust spacing as needed */
+    margin-bottom: 8px;
+  }
+}
+
 .scroll {
   list-style: none;
   padding: 0;
@@ -124,8 +196,14 @@
 }
 
 .scroll li {
-  font-size: 32px;
+  font-size: 1rem;
   font-weight: bold;
+}
+
+@media (min-width: 601px) {
+  .scroll li {
+    font-size: 1.5rem; /* Increase font size for desktop */
+  }
 }
 
 @keyframes scroll {
@@ -149,8 +227,30 @@
   }
 }
 
+@media (max-width: 600px) {
+  .scroll {
+    animation: scroll-mobile 10s linear infinite; /* Adjust scrolling animation for mobile */
+  }
+
+  @keyframes scroll-mobile {
+    0%, 100% {
+      transform: translate3d(0,0,0);
+    }
+    25%, 50%, 75% {
+      transform: translate3d(0,-25%, 0);
+    }
+  }
+}
+
 .bubble-text {
-  font-size: 24px;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 601px) {
+  .bubble-text {
+    font-size: 1.25rem; /* Increase font size for desktop */
+    margin-left: 2px;
+  }
 }
 
 .decorative-bubble {
@@ -160,7 +260,11 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   animation: float 5s ease-in-out infinite;
 }
-
+@media (max-width: 600px) {
+  .decorative-bubble{
+    display: none; /* Hide decorative bubbles on mobile */
+  }
+}
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -184,6 +288,46 @@
   width: 140px;
   height: 140px;
 }
+
 .bubble:nth-child(3) .scroll li {
   margin-left: 10px; /* Add margin-left to adjust single digit alignment */
+}
+
+@media (max-width: 600px) {
+  .bubble:first-child {
+    bottom: 70%;
+    right: 20%;
+    width: 120px;
+    height: 120px;
+  }
+
+  .bubble:nth-child(2) {
+    bottom: 10%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .bubble:nth-child(3) {
+    bottom: 5%;
+    left: 40%;
+    width: 80px;
+    height: 80px;
+  }
+
+  .bubble-number-unit-container {
+    font-size: 0.875rem; /* Decrease font size for mobile */
+  }
+
+  .bubble-number-container {
+    height: 17px; /* Decrease height for mobile */
+  }
+
+  .unit {
+    font-size: 0.875rem; /* Decrease font size for mobile */
+  }
+
+  .scroll li {
+    font-size: 0.875rem; /* Decrease font size for mobile */
+  }
 }

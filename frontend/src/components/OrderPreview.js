@@ -5,16 +5,10 @@ import '../assets/styles/OrderPreview.css';
 const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, proteinsCost, fats, fatsCost, additionalNotes, subTotal, deliveryFees, serviceFees, taxes, total }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [notes, setNotes] = useState(additionalNotes);
-  const [carbValue, setCarbValue] = useState(carbohydrates);
-  const [proteinValue, setProteinValue] = useState(proteins);
-  const [fatValue, setFatValue] = useState(fats);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
-  };
-
-  const handleValueChange = (e, setter) => {
-    setter(e.target.value);
   };
 
   const handleKeyPress = (e) => {
@@ -23,37 +17,44 @@ const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, 
     }
   };
 
-  return (
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const renderOrderPreview = () => (
     <div className="order-preview">
       <div className="order-preview-header">
         <h1>{orderTitle}</h1>
-        <button className="edit-button" onClick={handleEditClick}>Edit</button>
       </div>
       <div className="macro-nutrients">
-        <div className="nutrient">
+        <div className="nutrient-column">
           <span>Carbohydrates</span>
-          <span className="value">
-            {isEditing ? <input type="number" value={carbValue} onChange={(e) => handleValueChange(e, setCarbValue)} onKeyPress={handleKeyPress} className="editable-input carb-value" /> : <span className="value-text carb-value">{carbValue}g</span>}
-            <span className="cost">${carbohydratesCost}</span>
-          </span>
-        </div>
-        <div className="nutrient">
           <span>Proteins</span>
-          <span className="value">
-            {isEditing ? <input type="number" value={proteinValue} onChange={(e) => handleValueChange(e, setProteinValue)} onKeyPress={handleKeyPress} className="editable-input protein-value" /> : <span className="value-text protein-value">{proteinValue}g</span>}
-            <span className="cost">${proteinsCost}</span>
-          </span>
-        </div>
-        <div className="nutrient">
           <span>Fats</span>
-          <span className="value">
-            {isEditing ? <input type="number" value={fatValue} onChange={(e) => handleValueChange(e, setFatValue)} onKeyPress={handleKeyPress} className="editable-input fat-value" /> : <span className="value-text fat-value">{fatValue}g</span>}
-            <span className="cost">${fatsCost}</span>
-          </span>
+        </div>
+        <div className="value-column">
+          <span>{carbohydrates}g</span>
+          <span>{proteins}g</span>
+          <span>{fats}g</span>
+        </div>
+        <div className="adjusted-price-column">
+          <span>${carbohydratesCost}</span>
+          <span>${proteinsCost}</span>
+          <span>${fatsCost}</span>
         </div>
       </div>
       <div className="additional-notes">
-        <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} className="editable-input notes-input" placeholder="Enter additional notes" />
+        <input
+          type="text"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="editable-input notes-input"
+          placeholder="Enter additional notes"
+        />
       </div>
       <div className="thin-line"></div>
       <div className="order-summary">
@@ -81,6 +82,25 @@ const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, 
       </div>
       <button className="checkout-button">Order and checkout</button>
     </div>
+  );
+
+  return (
+    <>
+      <div className="order-preview-desktop">
+        {renderOrderPreview()}
+      </div>
+      <div className="order-preview-mobile">
+        <button onClick={openModal} className="open-modal-button">View Order</button>
+        {isModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close-button" onClick={closeModal}>&times;</span>
+              {renderOrderPreview()}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

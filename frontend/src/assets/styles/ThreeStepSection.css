@@ -1,299 +1,446 @@
 .three-step-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .text-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.text-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.text-section h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #302D40;
+  text-align: center;
+}
+
+.step {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2.5rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.step-1 {
+  border: 1.3125rem solid rgba(212, 239, 192, 0.7);
+  width: 40%;
+  height: auto;
+  margin-right: 10%;
+  z-index: 1;
+}
+
+.step-2 {
+  border: 1.3125rem solid rgba(175, 236, 188, 0.7);
+  width: 50%;
+  height: auto;
+  margin-left: 10%;
+  z-index: 2;
+}
+
+.step-3 {
+  border: 1.3125rem solid rgba(105, 199, 159, 0.7);
+  width: 60%;
+  height: auto;
+  margin-right: 10%;
+}
+
+.step-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.step-content .step-1-text,
+.step-content .step-2-text,
+.step-content .confirm-pickup-text,
+.step-content .enjoy-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  text-align: center;
+  color: #302D40;
+  padding: 5%;
+}
+
+.step-content .step-1-text {
+  margin-left: 25%;
+  margin-top: 5%;
+  margin-bottom: 15%;
+}
+
+.step-content .step-2-text {
+  margin-right: 50%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm-pickup-text {
+  margin-top: 20%;
+  margin-right: -50%;
+  margin-left: 10%;
+}
+
+.enjoy-text {
+  margin-top: 0;
+  margin-bottom: 20%;
+  margin-left: 10%;
+  margin-right: -50%;
+}
+
+.step-image-1 {
+  position: absolute;
+  width: 35%;
+  height: auto;
+  top: -10%;
+  left: 0;
+}
+
+.step-image-2 {
+  position: absolute;
+  width: 30%;
+  height: auto;
+  right: 0;
+  top: 10%;
+}
+
+.step-image-3 {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  top: 70%;
+  left: 50%;
+}
+
+.exclamation-icon {
+  position: absolute;
+  width: 2%;
+  height: auto;
+  left: 20%;
+  top: 10%;
+}
+
+.broccoli-icon {
+  position: absolute;
+  top: -5%;
+  left: 55%;
+  width: 13%;
+  height: auto;
+}
+
+.meat-icon {
+  position: absolute;
+  top: 35%;
+  left: 60%;
+  width: 13%;
+  height: auto;
+}
+
+.sushi-icon {
+  position: absolute;
+  top: -35%;
+  left: 67%;
+  width: 13%;
+  height: auto;
+}
+
+.heart-emoji {
+  position: absolute;
+  top: -20%;
+  left: 55%;
+  width: 10%;
+  height: auto;
+}
+
+.handsup-emoji {
+  position: absolute;
+  top: -27%;
+  left: 70%;
+  width: 10%;
+  height: auto;
+}
+
+.loving-emoji {
+  position: absolute;
+  top: 10%;
+  left: 65%;
+  width: 10%;
+  height: auto;
+}
+
+.lit-emoji {
+  position: absolute;
+  top: 35%;
+  left: 75%;
+  width: 10%;
+  height: auto;
+}
+
+.surprised-emoji {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 10%;
+  height: auto;
+}
+
+.so-good-bubble {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  width: 15%;
+  height: auto;
+}
+
+.arrow {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  height: auto;
+}
+
+.downleft-arrow {
+  width: 10%;
+  height:auto;
+  left: 20%;
+  margin-bottom: -15%;
+}
+
+.downright-arrow {
+  right: 15%;
+  width: 10%;
+  height:auto;
+  margin-bottom: -13%;
+}
+
+.get-started-button {
+  background-color: #302D40;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.75rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.625rem;
+  padding: 1.25rem 3.125rem;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+  margin-right: 3.125rem;
+  line-height: 1.5;
+  text-align: center;
+  display: inline-block;
+  width: auto;
+  white-space: normal;
+}
+
+@media (max-width: 1200px) {
   .text-section h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 36px;
-    font-weight: bold;
-    color: #302D40;
-    text-align: center;
+    font-size: 1.5rem;
   }
-  
+
   .step {
-    background: #FFFFFF;
-    border-radius: 40px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    opacity: 80%;
+    width: 80%;
+    border-radius: 1.5rem;
+    margin: 1rem auto;
   }
-  
+
   .step-1 {
-    border: 21px solid #D4EFC0;
-    width: 770px;
-    height: 400px;
-    margin-right: 300px;
+    border: 1.3125rem solid rgba(212, 239, 192, 0.7);
+    width: 70%;
+    height: auto;
     z-index: 1;
   }
   
   .step-2 {
-    border: 21px solid #AFECBC;
-    width: 910px;
-    height: 400px;
-    margin-left: 200px;
+    border: 1.3125rem solid rgba(175, 236, 188, 0.7);
+    width: 70%;
+    height: auto;
     z-index: 2;
   }
   
   .step-3 {
-    border: 21px solid #69C79F;
-    width: 910px;
-    height: 400px;
-    margin-right: 100px;
+    border: 1.3125rem solid rgba(105, 199, 159, 0.7);
+    width: 80%;
+    height: auto;
   }
   
-  .step-content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+  .step-content .step-1-text,
+  .step-content .step-2-text,
+  .step-content .confirm-pickup-text,
+  .step-content .enjoy-text {
+    font-size: 1rem;
   }
-  
-  .step-content p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 28px;
-    line-height: 1.2;
-    text-align: center;
-    color: #302D40;
-    padding: 20px;
-  }
-  .text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the texts horizontally */
-    margin-top: 80px;
-  }
-  
-  .confirm-pickup-text {
-    margin-bottom: 0px; /* Adjust as needed */
-  }
-  
-  .enjoy-text {
-    margin-top: 0px; /* Adjust as needed */
-  }
-  
-  .step-image-1 {
-    width: var(--step-image-1-width, 50%);
-    height: var(--step-image-1-height);
-    top: var(--step-image-1-top, -30px);  
-    left: var(--step-image-1-left, 450px); 
-    margin-left: 20px;
-  }
-  
-  .step-image-2 {
-    width: var(--step-image-2-width, 50%);
-    height: var(--step-image-2-height);
-    top: var(--step-image-2-top, -30px);  
-    left: var(--step-image-2-left, 450px); 
-    margin-left: 20px;
-  }
-  
-  .step-image-3 {
-    position: absolute;
-    width: var(--step-image-3-width, 50%);
-    height: var(--step-image-3-height);
-    top: var(--step-image-3-top, 150px);  
-    left: var(--step-image-3-left, 300px); 
-    margin-left: 20px;
-  }
-  
-  .exclamation-icon {
-    position: absolute;
-    left: var(--exclamation-left, calc(30%));
-    top: var(--exclamation-top, 10%);
-    width: 16px;
-    height: 43px;
-  }
-  
-  .broccoli-icon {
-    position: absolute;
-    top: var(--broccoli-top, -30px);  
-    left: var(--broccoli-left, 450px); 
-    width: var(--broccoli-width, 136px);
-    height: var(--broccoli-height, 126px);
-  }
-  
-  .meat-icon {
-    position: absolute;
-    top: var(--meat-top, 90px);  
-    left: var(--meat-left, 500px); 
-    width: var(--meat-width, 111px);
-    height: var(--meat-height, 97px);
-  }
-  
-  .sushi-icon {
-    position: absolute;
-    top: var(--sushi-top, -60px);  
-    left: var(--sushi-left, 575px); 
-    width: var(--sushi-width, 111px);
-    height: var(--sushi-height, 97px);
-  }
-  
-  .heart-emoji {
-    position: absolute;
-    top: var(--heart-emoji-top, -60px);  
-    left: var(--heart-emoji-left, 575px); 
-    width: var(--heart-emoji-width, 81px);
-    height: var(--heart-emoji-height, 81px);
-  }
-  
-  .handsup-emoji {
-    position: absolute;
-    top: var(--handsup-emoji-top);
-    left: var(--handsup-emoji-left);
-    width: var(--handsup-emoji-width, 81px);
-    height: var(--handsup-emoji-height, 81px);
-  }
-  
-  .loving-emoji {
-    position: absolute;
-    top: var(--loving-emoji-top);
-    left: var(--loving-emoji-left);
-    width: var(--loving-emoji-width, 81px);
-    height: var(--loving-emoji-height, 81px);
-  }
-  
-  .lit-emoji {
-    position: absolute;
-    top: var(--lit-emoji-top);
-    left: var(--lit-emoji-left);
-    width: var(--lit-emoji-width, 81px);
-    height: var(--lit-emoji-height, 81px);
-  }
-  
-  .surprised-emoji {
-    position: absolute;
-    top: var(--surprised-emoji-top);
-    left: var(--surprised-emoji-left);
-    width: var(--surprised-emoji-width, 81px);
-    height: var(--surprised-emoji-height, 81px);
-  }
-  
-  .so-good-bubble {
-    position: absolute;
-    top: var(--so-good-top, 100px);
-    left: var(--so-good-left, 100px);
-    width: var(--so-good-width, 81px);
-    height: var(--so-good-height, 81px);
-  }
-  
-  .arrow {
-    position: relative;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  .downleft-arrow {
-    left: calc(15%);
-    margin-bottom: -250px;
-  }
-  
-  .downright-arrow {
-    right: calc(10%);
-    margin-bottom: -270px;
-  }
-  
+
   .get-started-button {
-    background-color: #302D40;
-    color: #FFFFFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    padding: 20px 50px;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-right: 50px;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
   }
-  :root {
-    --step-image-1-width: 284px;
-    --step-image-1-height: 402px;
-    
-    --step-image-2-width: 339px;
-    --step-image-2-height: 369px;
-    
-    --step-image-3-width: 441px;
-    --step-image-3-height: 226px;
-    
-    --exclamation-left: 30%;
-    --exclamation-top: 10%;
-    
-    --broccoli-top: -30px;
-    --broccoli-left: 450px;
-    --broccoli-width: 136px;
-    --broccoli-height: 126px;
-    
-    --meat-top: 90px;
-    --meat-left: 500px;
-    --meat-width: 111px;
-    --meat-height: 97px;
-    
-    --sushi-top: -60px;
-    --sushi-left: 575px;
-    --sushi-width: 111px;
-    --sushi-height: 97px;
-    
-    --heart-emoji-top: -60px;
-    --heart-emoji-left: 430px;
-    --heart-emoji-width: 81px;
-    --heart-emoji-height: 81px;
-    
-    --handsup-emoji-top: -100px;
-    --handsup-emoji-left: 500px;
-    --handsup-emoji-width: 95px;
-    --handsup-emoji-height: 95px;
-    
-    --loving-emoji-top: 25px;
-    --loving-emoji-left: 500px;
-    --loving-emoji-width: 98px;
-    --loving-emoji-height: 97px;
-    
-    --lit-emoji-top: 85px;
-    --lit-emoji-left: 600px;
-    --lit-emoji-width: 85px;
-    --lit-emoji-height: 85px;
-    
-    --surprised-emoji-top: 20px;
-    --surprised-emoji-left: 400px;
-    --surprised-emoji-width: 76px;
-    --surprised-emoji-height: 76px;
-  
-    --so-good-top: 0px;
-    --so-good-left: 0px;
-    --so-good-width: 81px;
-    --so-good-height: 81px;
+}
+
+@media (max-width: 768px) {
+  .text-section h2 {
+    font-size: 0.8rem;
   }
-  :root {
-    --step-image-1-width: 300px;
-    --step-image-1-height: 400px;
-    --step-image-1-top: -20px;
-    --step-image-1-left: 400px;
-  
-    --broccoli-top: -20px;
-    --broccoli-left: 430px;
-    --broccoli-width: 120px;
-    --broccoli-height: 110px;
-  
-    --so-good-top: 120px;
-    --so-good-left: 450px;
-    --so-good-width: 149px;
-    --so-good-height: 55px;
+
+  .step {
+    width: 90%;
+    margin: 1rem auto;
+    border-radius: 1rem;
   }
   
+  .step-1 {
+    border: 0.6rem solid rgba(212, 239, 192, 0.7);
+    width: 70%;
+    height: auto;
+    margin-right: -10%;
+    margin-bottom: -15%;
+    z-index: 1;
+  }
+  
+  .step-2 {
+    border: 0.7rem solid rgba(175, 236, 188, 0.7);
+    width: 70%;
+    margin-left: -5%;
+    margin-bottom: -15%;
+    height: auto;
+    z-index: 2;
+  }
+  
+  .step-3 {
+    border:0.7rem solid rgba(105, 199, 159, 0.7);
+    width: 80%;
+    margin-right: -10%;
+    height: auto;
+  }
+
+  .step-content .step-1-text,
+  .step-content .step-2-text,
+  .step-content .confirm-pickup-text,
+  .step-content .enjoy-text {
+    font-size: 0.5rem;
+  }
+
+  .get-started-button {
+    font-size: 0.4rem;
+    padding: 0.4rem 0.6rem;
+    margin-right: 30%;
+  }
+
+  .step-image-1 {
+    width: 30%;
+    top: 10%;
+    left: 5%;
+  }
+
+  .step-image-2 {
+    width: 35%;
+    right: 0%;
+    top: 20%;
+  }
+
+  .step-image-3 {
+    width: 40%;
+    top: 50%;
+    left: 50%;
+  }
+
+  .exclamation-icon {
+    width: 3%;
+    top: 5%;
+    left: 25%;
+  }
+
+  .broccoli-icon {
+    width: 15%;
+    top: -5%;
+    left: 50%;
+  }
+
+  .meat-icon {
+    width: 15%;
+    top: 30%;
+    left: 55%;
+  }
+
+  .sushi-icon {
+    width: 15%;
+    top: -20%;
+    left: 67%;
+  }
+
+  .heart-emoji {
+    width: 15%;
+    top: -45%;
+    left: 55%;
+  }
+
+  .handsup-emoji {
+    width: 15%;
+    top: -40%;
+    left: 70%;
+  }
+
+  .loving-emoji {
+    width: 15%;
+    top: -10%;
+    left: 65%;
+  }
+
+  .lit-emoji {
+    width: 15%;
+    top: 0%;
+    left: 75%;
+  }
+
+  .surprised-emoji {
+    width: 15%;
+    top: -10%;
+    left: 50%;
+  }
+
+  .so-good-bubble {
+    width: 25%;
+    top: 30%;
+    left: 55%;
+  }
+
+  .arrow {
+    width: 12%;
+  }
+
+  .downleft-arrow {
+    left: 30%;
+    width: 10%;
+    height:auto;
+    margin-top: 10%;
+    margin-bottom: -20%;
+  }
+
+  .downright-arrow {
+    right: 20%;
+    width: 10%;
+    height:auto;
+    margin-top: 5%;
+    margin-bottom: -15%;
+  }
+}

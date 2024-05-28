@@ -1,27 +1,19 @@
 /* src/assets/styles/OrderPreview.css */
 .order-preview {
-  background: #fff;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  height: 630px;
-  margin-left: 60px;
-  margin-top: 30px;
-  position: relative; /* Added position relative for the container */
 }
 
 .order-preview-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 60px; 
+  margin-bottom: 10px; 
 }
 
 .edit-button {
-  position: absolute;
-  top:80px; /* Adjusted top position */
-  right:10px; /* Adjusted right position */
   font-family: 'Poppins', sans-serif;
   background: #302D40;
   color: #fff;
@@ -32,62 +24,39 @@
   font-size: 14px;
 }
 
-.macro-nutrients .nutrient {
+.macro-nutrients {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
 
-.value {
+.nutrient-column,
+.value-column,
+.adjusted-price-column {
   display: flex;
-  gap: 5px;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.editable-input {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  background: none;
+.nutrient-column span,
+.value-column span,
+.adjusted-price-column span {
+  margin: 5px 0;
+}
+
+.nutrient-column span {
+  margin: 12px 0;
+}
+
+.adjusted-price-column span {
+  margin: 12px 0;
+}
+.value-column span{
   border: 1px solid #302D40;
   border-radius: 20px;
   padding: 5px 10px;
-  outline: none;
-  width: 60px;
-  -moz-appearance: textfield;
 }
 
-.editable-input::-webkit-outer-spin-button,
-.editable-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.value-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  border: 1px solid #302D40;
-  width: 60px;
-  text-align: center;
-  box-sizing: border-box;
-  margin-right: 20px;
-}
-
-.carb-value {
-  margin-right: 40px;
-  text-align: center;
-}
-
-.protein-value {
-  margin-right: 32px;
-  text-align: center;
-}
-
-.fat-value {
-  margin-right: 13px;
-  text-align: center;
-}
 
 .cost {
   font-family: 'Poppins', sans-serif;
@@ -105,6 +74,7 @@
   width: 100%;
   display: block;
   margin: 10px 0;
+  padding-left: 10px;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   background: none;
@@ -139,4 +109,83 @@
   text-align: center;
   display: block;
   margin: 20px auto 0;
+}
+
+/* Styles for mobile modal */
+.order-preview-mobile .open-modal-button {
+  font-family: 'Poppins', sans-serif;
+  background: #302D40;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  transform: translateX(-50%);
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  bottom: 10%;
+}
+.order-preview-header{
+  margin-bottom: 10px;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 20px;
+  position: relative;
+  overflow-y: auto;
+  width: 100%;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #000;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .order-preview-desktop {
+    display: block;
+  }
+
+  .order-preview-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-preview-desktop {
+    display: none;
+  }
+
+  .order-preview-mobile {
+    display: block;
+  }
+
+  .order-preview {
+    max-width: 90%;
+  }
+
+  .App {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 50px; /* Space for the sticky footer */
+  }
 }

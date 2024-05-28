@@ -7,10 +7,11 @@ const CategoryScroll = ({ categories }) => {
   const scrollContainerRef = useRef(null);
   const [visibleItems, setVisibleItems] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]); // Default to the first category
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const calculateVisibleItems = () => {
-    if (scrollContainerRef.current) {
+    if (scrollContainerRef.current && !isMobile) {
       const containerWidth = scrollContainerRef.current.offsetWidth - 80; // Subtract width for chevrons
       let totalWidth = 0;
       let itemsVisible = [];
@@ -56,18 +57,24 @@ const CategoryScroll = ({ categories }) => {
   };
 
   useEffect(() => {
-    calculateVisibleItems();
-    window.addEventListener('resize', calculateVisibleItems);
-    return () => window.removeEventListener('resize', calculateVisibleItems);
-  }, [categories, startIndex]);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      calculateVisibleItems();
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [categories, startIndex, isMobile]);
 
   return (
     <div className="category-scroll-container">
-      <button className="chevron-button left" onClick={scrollLeft}>
-        <img src={chevronLeft} alt="Scroll Left" />
-      </button>
+      {!isMobile && (
+        <button className="chevron-button left" onClick={scrollLeft}>
+          <img src={chevronLeft} alt="Scroll Left" />
+        </button>
+      )}
       <div className="category-scroll" ref={scrollContainerRef}>
-        {categories.slice(startIndex, startIndex + visibleItems.length).map((category, index) => (
+        {categories.slice(isMobile ? 0 : startIndex, isMobile ? categories.length : startIndex + visibleItems.length).map((category, index) => (
           <div
             key={index}
             className={`category-item ${category === selectedCategory ? 'selected' : ''}`}
@@ -77,9 +84,11 @@ const CategoryScroll = ({ categories }) => {
           </div>
         ))}
       </div>
-      <button className="chevron-button right" onClick={scrollRight}>
-        <img src={chevronRight} alt="Scroll Right" />
-      </button>
+      {!isMobile && (
+        <button className="chevron-button right" onClick={scrollRight}>
+          <img src={chevronRight} alt="Scroll Right" />
+        </button>
+      )}
     </div>
   );
 };

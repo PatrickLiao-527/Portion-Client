@@ -1,10 +1,13 @@
+/* Header.css */
 .header-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 1rem;
   background-color: #FFFFFF;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Ensure it stays on top */
+  z-index: 10; /* Ensure it stays on top */
 }
 
 .logo-wrapper {
@@ -13,35 +16,32 @@
 }
 
 .logo {
-  width: 45px;
-  height: 45px;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin-left: 50px;
+  width: 100px; /* Adjust the size to make the logo larger */
+  height: auto; /* Adjust size to fit logo */
+  margin-left: 1rem;
 }
 
-.company {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  margin-left: 20px;
-  color: #302D40;
+.nav-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  gap: 2rem; /* Ensure spacing between elements */
 }
 
 .nav-links {
-  margin-left: auto;
-  margin-right: 50px;
+  display: flex;
+  gap: 2rem; /* Ensure spacing between nav links */
 }
 
 .nav-links a {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   color: #302D40;
-  margin-right: 46px;
   text-decoration: none;
   position: relative;
-  padding-bottom: 5px;
+  padding-bottom: 0.25rem;
 }
 
 .nav-links a::after {
@@ -61,13 +61,14 @@
 
 .auth-buttons {
   display: flex;
-  gap: 18px;
+  gap: 1rem;
+  align-items: center; /* Ensure alignment with nav links */
 }
 
 .auth-button {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   color: #302D40;
   border: none;
   background: none;
@@ -77,6 +78,111 @@
 .auth-button.primary {
   background-color: #302D40;
   color: #fff;
-  padding: 10px 24px;
+  padding: 0.5rem 1.5rem;
   border-radius: 5px;
+}
+
+/* Mobile styles */
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Add transition for animation */
+}
+
+.hamburger-menu.open {
+  transform: rotate(90deg); /* Rotate 90 degrees when open */
+}
+
+.hamburger-menu img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
+}
+
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+  padding: 1rem; /* Adjust padding */
+  background-color: #FFFFFF; /* Ensure background to separate from content */
+  position: absolute;
+  top: 60px;
+  left: 0; /* Align to the left */
+  right: 0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10; /* Ensure it stays on top */
+}
+
+.mobile-nav a,
+.mobile-nav .auth-button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem; /* Make font smaller */
+  color: #302D40;
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: left; /* Align text to the left */
+}
+
+.mobile-nav a.active::after {
+  background-color: #302D40;
+}
+
+@media (max-width: 768px) {
+  .nav-links, .auth-buttons {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+    order: -1; /* Move hamburger menu to the left */
+  }
+
+  .logo-wrapper {
+    order: 1; /* Move logo to the right */
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+
+  .auth-button.primary {
+    background: none; /* Remove background for mobile */
+    padding: 0.5rem 1rem; /* Adjust padding for mobile */
+  }
+}
+
+@media (min-width: 769px) {
+  .auth-button.primary {
+    background-color: #302D40; /* Restore background color for desktop */
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+  }
+
+  .nav-links,
+  .auth-buttons {
+    display: flex; /* Ensure they are displayed on desktop */
+  }
+}
+
+@media (max-width: 480px) {
+  .company {
+    font-size: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+  }
+
+  .auth-button {
+    font-size: 0.75rem;
+  }
+
+  .auth-button.primary {
+    padding: 0.5rem 0.75rem;
+  }
 }

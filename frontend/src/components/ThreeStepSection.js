@@ -27,9 +27,9 @@ const ThreeStepSection = () => {
           <div className="step-content">
             <img src={CoolKidsStanding} alt="Step 1" className="step-image step-image-1" />
             <img src={ExclamationIcon} alt="Exclamation" className="exclamation-icon" />
-            <p>
+            <p className="step-1-text">
               <strong>Browse</strong> our carefully selected restaurant selection <br />
-              & <strong>find one to satisfy</strong> your cravings and needs.
+              &<br /> <strong>find one to satisfy</strong> your cravings and needs.
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@ const ThreeStepSection = () => {
       <div className="row">
         <div className="step step-2">
           <div className="step-content">
-            <p>
+            <p className="step-2-text">
               <strong>Choose</strong> an offering & <strong>customize</strong>!<br />
               20g, 50g, 100g, or whatever you want, we will make sure you get your desired portions.
             </p>
@@ -55,26 +55,26 @@ const ThreeStepSection = () => {
           <button className="get-started-button">Get Started With<br />Your First Order!</button>
         </div>
         <div className="step step-3">
-            <div className="step-content">
-                <div className="text-container">
-                <p className="confirm-pickup-text">
-                    <strong>Confirm & pick up/<br />get it delivered</strong>!
-                </p>
-                <p className="enjoy-text">
-                    Now, enjoy with friends<br /> or by yourself!
-                </p>
-                </div>
-                <img src={CoolKidsStayingHome} alt="Step 3" className="step-image step-image-3" />
-                <div className="emojis">
-                <img src={HeartEmoji} alt="Heart Emoji" className="heart-emoji" />
-                <img src={HandsUpEmoji} alt="Hands Up Emoji" className="handsup-emoji" />
-                <img src={LovingEmoji} alt="Loving Emoji" className="loving-emoji" />
-                <img src={LitEmoji} alt="Lit Emoji" className="lit-emoji" />
-                <img src={SurprisedEmoji} alt="Surprised Emoji" className="surprised-emoji" />
-                </div>
-                <img src={SoGoodBubble} alt="So Good" className="so-good-bubble" />
+          <div className="step-content">
+            <div className="text-container">
+              <p className="confirm-pickup-text">
+                <strong>Confirm & pick up/<br />get it delivered</strong>!
+              </p>
+              <p className="enjoy-text">
+                Now, enjoy with friends<br /> or by yourself!
+              </p>
             </div>
+            <img src={CoolKidsStayingHome} alt="Step 3" className="step-image step-image-3" />
+            <div className="emojis">
+              <img src={HeartEmoji} alt="Heart Emoji" className="heart-emoji" />
+              <img src={HandsUpEmoji} alt="Hands Up Emoji" className="handsup-emoji" />
+              <img src={LovingEmoji} alt="Loving Emoji" className="loving-emoji" />
+              <img src={LitEmoji} alt="Lit Emoji" className="lit-emoji" />
+              <img src={SurprisedEmoji} alt="Surprised Emoji" className="surprised-emoji" />
             </div>
+            <img src={SoGoodBubble} alt="So Good" className="so-good-bubble" />
+          </div>
+        </div>
       </div>
     </div>
   );

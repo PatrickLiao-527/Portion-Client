@@ -2,16 +2,18 @@
 .search-bar {
   display: flex;
   align-items: center;
-  width: 750px; /* Adjust the width as needed */
+  width: 100%;
+  max-width: 750px;
   border: 1px solid #ccc;
-  border-radius: 20px; /* Slightly rounded corners */
+  border-radius: 20px;
   padding: 10px 15px;
   background: #fff;
-  margin-top: 30px; 
+  margin-top: 30px;
 }
 
 .search-icon {
   margin-right: 10px;
+  font-size: 24px; /* Ensure the icon is visible */
 }
 
 .search-input {
@@ -19,11 +21,52 @@
   outline: none;
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  font-size: 24px; /* Font size 24 */
-  font-weight: 600; /* Poppins semibold */
-  color: #9F9F9F; /* Text color */
+  font-size: 24px;
+  font-weight: 600;
+  color: #9F9F9F;
 }
 
 .search-input::placeholder {
-  color: #9F9F9F; /* Placeholder color */
+  color: #9F9F9F;
+}
+
+@media (max-width: 1200px) {
+  .search-bar {
+    max-width: 40%;
+    padding: 8px 12px;
+  }
+  .search-input {
+    font-size: 20px;
+  }
+  .search-icon {
+    font-size: 20px; /* Adjust icon size for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    max-width: 40%; /* Ensure the search bar fills the width of the screen */
+    padding: 6px 10px;
+    margin: 0 auto; /* Center the search bar */
+  }
+  .search-input {
+    font-size: 18px;
+  }
+  .search-icon {
+    font-size: 18px; /* Adjust icon size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .search-bar {
+    max-width: 50%; /* Ensure the search bar fills the width of the screen */
+    padding: 5px 8px;
+    margin: 0 auto; /* Center the search bar */
+  }
+  .search-input {
+    font-size: 16px;
+  }
+  .search-icon {
+    font-size: 16px; /* Adjust icon size for smaller screens */
+  }
 }
