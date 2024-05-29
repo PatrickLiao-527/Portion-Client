@@ -1,4 +1,6 @@
+// src/components/ThreeStepSection.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../assets/styles/ThreeStepSection.css';
 import ExclamationIcon from '../assets/images/Exclamation_icon.png';
 import DownLeftArrow from '../assets/images/DownleftArrow.png';
@@ -17,6 +19,12 @@ import SurprisedEmoji from '../assets/images/Surprised_emoji.png';
 import SoGoodBubble from '../assets/images/So-good-bubble.png';
 
 const ThreeStepSection = () => {
+  const navigate = useNavigate();
+
+  const handleGetStartedClick = () => {
+    navigate('/order');
+  };
+
   return (
     <div className="three-step-section">
       <div className="row">
@@ -52,7 +60,7 @@ const ThreeStepSection = () => {
       <img src={DownRightArrow} alt="Down Right Arrow" className="arrow downright-arrow" />
       <div className="row">
         <div className="text-section">
-          <button className="get-started-button">Get Started With<br />Your First Order!</button>
+          <button className="get-started-button" onClick={handleGetStartedClick}>Get Started With<br />Your First Order!</button>
         </div>
         <div className="step step-3">
           <div className="step-content">

@@ -43,7 +43,7 @@
 @media (max-width: 768px) {
   .restaurant-list {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    max-width: 50%; 
+    max-width: 40%; 
     margin: 0 auto;
   }
   .restaurant-item {

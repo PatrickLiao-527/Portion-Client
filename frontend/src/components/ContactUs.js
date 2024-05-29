@@ -1,5 +1,5 @@
 // src/components/ContactUs.js
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/ContactUs.css';
 import phoneIcon from '../assets/images/contact-us-phoneCall_icon.png'; 
 import emailIcon from '../assets/images/contact-us-email_icon.png';
@@ -8,16 +8,25 @@ import discordIcon from '../assets/images/contact-us-discord_icon.png';
 import instagramIcon from '../assets/images/contact-us-instagram_icon.png';
 
 const ContactUs = () => {
+  const [isTooltipVisible, setTooltipVisible] = useState(false);
+
   return (
     <div className="contact-us-container">
       <h1 className="contact-title">Contact Us</h1>
-      <p className="contact-subtitle">Any question or remarks? Just write us a message!</p>
+      <p className="contact-subtitle">Patrick f**ked something up? Js call him!</p>
       <div className="contact-content">
         <div className="contact-info">
           <h2 className="contact-info-title">Contact Information</h2>
-          <div className="contact-details">
+          <div
+            className="contact-details"
+            onMouseEnter={() => setTooltipVisible(true)}
+            onMouseLeave={() => setTooltipVisible(false)}
+          >
             <img src={phoneIcon} alt="Phone" className="contact-icon" />
             <span>+1 909 680 8214</span>
+            {isTooltipVisible && (
+              <div className="tooltip">Yep, that's his number right there</div>
+            )}
           </div>
           <div className="contact-details">
             <img src={emailIcon} alt="Email" className="contact-icon" />

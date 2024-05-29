@@ -18,8 +18,6 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
       setActiveLink('Order');
     } else if (path === '/contact-us') {
       setActiveLink('Contact Us');
-    } else if (path === '/login') {
-      setActiveLink('Login');
     }
   }, [location]);
 
@@ -56,7 +54,7 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
         <div className="mobile-nav">
           <Link to="/" onClick={() => { setActiveLink('Home'); setMobileNavVisible(false); }} className={activeLink === 'Home' ? 'active' : ''}>Home</Link>
           <Link to="/order" onClick={() => { setActiveLink('Order'); setMobileNavVisible(false); }} className={activeLink === 'Order' ? 'active' : ''}>Order</Link>
-          <Link to="/contact" onClick={() => { setActiveLink('Contact Us'); setMobileNavVisible(false); }} className={activeLink === 'Contact Us' ? 'active' : ''}>Contact Us</Link>
+          <Link to="/contact-us" onClick={() => { setActiveLink('Contact Us'); setMobileNavVisible(false); }} className={activeLink === 'Contact Us' ? 'active' : ''}>Contact Us</Link>
           <button className="auth-button" onClick={() => { onLoginClick(); setMobileNavVisible(false); }}>Log in</button>
           <button className="auth-button" onClick={() => { onSignUpClick(); setMobileNavVisible(false); }}>Sign up</button>
         </div>

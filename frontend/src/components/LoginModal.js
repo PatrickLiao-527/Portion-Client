@@ -15,6 +15,7 @@ const LoginModal = ({ onClose, onSignUpClick }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-container login-container">
+      <button className="close-button-modal" onClick={onClose}>×</button>
         <div className="modal-header">
           <img src={logo} alt="Portion Logo" className="logo" />
           <button className="close-button-modal" onClick={onClose}>×</button>

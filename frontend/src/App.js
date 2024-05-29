@@ -7,6 +7,7 @@ import SignUpModal from './components/SignUpModal';
 import SignUpWithEmail from './components/SignUpWithEmail';
 import OrderPage from './components/OrderPage';
 import HomePage from './components/HomePage';
+import ContactUsPage from './components/ContactUs';
 import LoginModal from './components/LoginModal';
 
 function App() {
@@ -23,10 +24,7 @@ function App() {
   };
   const closeEmailModal = () => setIsEmailModalOpen(false);
 
-  const openLoginModal = () => {
-    setIsModalOpen(false); // Close the initial signup modal
-    setIsLoginModalOpen(true);
-  };
+  const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
   const openSignUpModal = () => {
@@ -38,7 +36,7 @@ function App() {
     <Router>
       <GlobalStyle />
       <div className="App">
-        <Header onSignUpClick={openModal} />
+        <Header onSignUpClick={openModal} onLoginClick={openLoginModal} />
         {isModalOpen && (
           <SignUpModal
             onClose={closeModal}
@@ -51,6 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/order" element={<OrderPage />} />
+          <Route path="/contact-us" element={<ContactUsPage />} />
         </Routes>
       </div>
     </Router>

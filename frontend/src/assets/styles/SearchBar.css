@@ -59,8 +59,8 @@
 
 @media (max-width: 480px) {
   .search-bar {
-    max-width: 50%; /* Ensure the search bar fills the width of the screen */
-    padding: 5px 8px;
+    max-width: 40%; /* Ensure the search bar fills the width of the screen */
+    padding: 5px 0;
     margin: 0 auto; /* Center the search bar */
   }
   .search-input {

@@ -65,7 +65,7 @@
   .category-scroll {
     width: 100%;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 10px 30px;
     white-space: nowrap;
   }
   .category-item {
