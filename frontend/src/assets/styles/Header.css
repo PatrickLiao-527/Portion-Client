@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.logo {
+.logo-header{
   width: 100px; /* Adjust the size to make the logo larger */
   height: auto; /* Adjust size to fit logo */
   margin-left: 1rem;
