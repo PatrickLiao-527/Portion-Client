@@ -1,19 +1,77 @@
-// src/components/IndividualRestaurant.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../assets/styles/IndividualRestaurant.css';
 import putInCartIcon from '../assets/images/shopping-cart_icon.png';
 import downArrowIcon from '../assets/images/Get-in-cart-down-arrow_icon.png';
 import backButtonIcon from '../assets/images/Back_button.png';
 import { createOrder } from '../api_services/api';
 import { generateMenuItems } from '../utils/dataGenerators';
+import HeartEmoji from '../assets/images/Heart_emoji.png';
+import HandsUpEmoji from '../assets/images/HandsUp_emoji.png';
+import LovingEmoji from '../assets/images/Loving_emoji.png';
+import LitEmoji from '../assets/images/Lit_emoji.png';
+import SurprisedEmoji from '../assets/images/Surprised_emoji.png';
+
+const emojis = [HeartEmoji, HandsUpEmoji, LovingEmoji, LitEmoji, SurprisedEmoji];
 
 const IndividualRestaurant = ({ restaurant, onBackClick }) => {
   const [menuItems, setMenuItems] = useState([]);
+  const [floatingEmojis, setFloatingEmojis] = useState([]);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const emojiContainerRef = useRef(null);
 
   useEffect(() => {
     const items = generateMenuItems(restaurant.id, Math.floor(Math.random() * 10 + 5));
     setMenuItems(items);
   }, [restaurant]);
+
+  const handleOrder = (foodItem, event) => {
+    event.preventDefault();
+    setMousePosition({ x: event.clientX, y: event.clientY });
+
+    const orderData = {
+      foodItem: foodItem.name,
+      carbohydrates: foodItem.defaultCarbohydrates,
+      proteins: foodItem.defaultProteins,
+      fats: foodItem.defaultFats,
+      price: foodItem.price,
+    };
+
+    createOrder(orderData)
+      .then((response) => {
+        console.log('Order created:', response);
+        addFloatingEmojis();
+      })
+      .catch((error) => {
+        console.error('Error creating order:', error);
+      });
+  };
+
+  const addFloatingEmojis = () => {
+    const newEmojis = Array.from({ length: 15 }, () => {
+      const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+      const randomOffsetX = (Math.random() - 0.5) * 400;
+      const randomoffsetY = (Math.random() - 0.5) * 400;
+      return {
+        id: Date.now() + Math.random(),
+        src: randomEmoji,
+        left: mousePosition.x + randomOffsetX,
+        top: mousePosition.y + randomoffsetY, 
+      };
+    });
+
+    setFloatingEmojis((prev) => [...prev, ...newEmojis]);
+
+    // Immediately trigger animation frame
+    requestAnimationFrame(() => {
+      if (emojiContainerRef.current) {
+        emojiContainerRef.current.classList.add('animate');
+      }
+    });
+
+    setTimeout(() => {
+      setFloatingEmojis((prev) => prev.filter((emoji) => !newEmojis.includes(emoji)));
+    }, 2000);
+  };
 
   return (
     <div className="individual-restaurant-card">
@@ -24,14 +82,25 @@ const IndividualRestaurant = ({ restaurant, onBackClick }) => {
       </div>
       <div className="individual-restaurant-content">
         {menuItems.map((foodItem, index) => (
-          <FoodItemCard key={index} foodItem={foodItem} />
+          <FoodItemCard key={index} foodItem={foodItem} handleOrder={handleOrder} />
+        ))}
+      </div>
+      <div ref={emojiContainerRef}>
+        {floatingEmojis.map((emoji) => (
+          <img
+            key={emoji.id}
+            src={emoji.src}
+            alt="Floating Emoji"
+            className="floating-emoji"
+            style={{ left: emoji.left, top: emoji.top }}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const FoodItemCard = ({ foodItem }) => {
+const FoodItemCard = ({ foodItem, handleOrder }) => {
   const [macros, setMacros] = useState({
     carbohydrates: foodItem.defaultCarbohydrates,
     proteins: foodItem.defaultProteins,
@@ -40,6 +109,8 @@ const FoodItemCard = ({ foodItem }) => {
     additional2: 0,
     additional3: 0,
   });
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleMacroChange = (macro, value) => {
     setMacros(prevState => ({
@@ -54,26 +125,6 @@ const FoodItemCard = ({ foodItem }) => {
     return { color: 'black' };
   };
 
-  const handleOrder = () => {
-    const orderData = {
-      foodItem: foodItem.name,
-      carbohydrates: macros.carbohydrates + macros.additional1,
-      proteins: macros.proteins + macros.additional2,
-      fats: macros.fats + macros.additional3,
-      price: foodItem.price,
-    };
-
-    createOrder(orderData)
-      .then((response) => {
-        console.log('Order created:', response);
-        // handle success (e.g., show confirmation, update state)
-      })
-      .catch((error) => {
-        console.error('Error creating order:', error);
-        // handle error (e.g., show error message)
-      });
-  };
-
   return (
     <div className="food-item">
       <div className="food-details">
@@ -85,7 +136,13 @@ const FoodItemCard = ({ foodItem }) => {
           <p className="food-ingredients">Ingredients: {foodItem.ingredients}</p>
         </div>
       </div>
-      <div className="cart-icon-container" onClick={handleOrder}>
+      <div className="cart-icon-container" onClick={(event) => {
+        if (!isButtonDisabled) {
+          setIsButtonDisabled(true);
+          handleOrder(foodItem, event);
+          setTimeout(() => setIsButtonDisabled(false), 300);
+        }
+      }}>
         <img src={putInCartIcon} alt="Put in Cart" className="put-in-cart-icon" />
         <img src={downArrowIcon} alt="Down Arrow" className="down-arrow-icon" />
       </div>
@@ -158,5 +215,4 @@ const FoodItemCard = ({ foodItem }) => {
     </div>
   );
 };
-
 export default IndividualRestaurant;

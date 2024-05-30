@@ -138,7 +138,24 @@
     transform: translateY(-13px);
   }
 }
+.floating-emoji {
+  position: absolute;
+  animation: float 2s;
+  width: 40px; /* Adjust size as needed */
+  height: auto;
+  pointer-events: none; /* Prevent mouse interaction */
+}
 
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
 .macronutrients-wrapper {
   display: flex;
   flex-direction: column;

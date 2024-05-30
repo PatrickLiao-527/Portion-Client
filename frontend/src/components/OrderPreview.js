@@ -1,11 +1,13 @@
 // src/components/OrderPreview.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../assets/styles/OrderPreview.css';
 
 const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, proteinsCost, fats, fatsCost, additionalNotes, subTotal, deliveryFees, serviceFees, taxes, total }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [notes, setNotes] = useState(additionalNotes);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -24,7 +26,9 @@ const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, 
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+  const handleCheckout = () => {
+    navigate('/order-confirmation');
+  };
   const renderOrderPreview = () => (
     <div className="order-preview">
       <div className="order-preview-header">
@@ -80,7 +84,7 @@ const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, 
         <span>Total</span>
         <span>${total}</span>
       </div>
-      <button className="checkout-button">Order and checkout</button>
+      <button className="checkout-button" onClick={handleCheckout}>Order and checkout</button>
     </div>
   );
 

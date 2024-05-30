@@ -9,6 +9,7 @@ import OrderPage from './components/OrderPage';
 import HomePage from './components/HomePage';
 import ContactUsPage from './components/ContactUs';
 import LoginModal from './components/LoginModal';
+import OrderConfirmation from './components/OrderConfirmation';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,6 +51,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} /> 
         </Routes>
       </div>
     </Router>
