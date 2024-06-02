@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import CategoryScroll from './CategoryScroll';
 import RestaurantList from './RestaurantList';
 import IndividualRestaurant from './IndividualRestaurant';
-import { fetchMenuItems } from '../api_services/api';
+import { fetchMenuItems } from '../services/api';
 import { generateCategories, generateRestaurants } from '../utils/dataGenerators';
 import OrderConfirmation from './OrderConfirmation';
 
@@ -40,7 +40,7 @@ const OrderPage = () => {
       <div className="order-content">
         {!showOrderConfirmation ? (
           <>
-            <OrderPreview
+            <OrderPreview //this is just a placeholder 
               orderTitle="Chicken Breast Salad"
               carbohydrates={45}
               carbohydratesCost={0}

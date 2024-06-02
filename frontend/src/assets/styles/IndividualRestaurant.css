@@ -1,4 +1,3 @@
-/* src/assets/styles/IndividualRestaurant.css */
 .individual-restaurant-card {
   border: 1px solid black;
   border-radius: 8px;
@@ -69,33 +68,51 @@
 
 .food-details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   flex-grow: 1;
   padding-left: 20px;
 }
 
-.food-texts-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
-}
-
 .food-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   color: #302D40;
-  margin-bottom: 5px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-.food-price,
-.food-calories,
+.food-price-row, .food-calories-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.food-price-text, .food-calories-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #302D40;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.food-price, .food-calories {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #302D40;
+  font-weight: 600;
+  min-width: 100px; /* Set a minimum width to avoid layout shifts */
+  text-align: right; /* Align text to the right */
+}
+
 .food-ingredients {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   color: #302D40;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 .cart-icon-container {
@@ -120,7 +137,7 @@
 
 .down-arrow-icon {
   position: absolute;
-  top: 100px;
+  top: 150px;
   width: 100%;
   height: auto;
   transition: transform 0.3s;
@@ -138,6 +155,7 @@
     transform: translateY(-13px);
   }
 }
+
 .floating-emoji {
   position: absolute;
   animation: float 2s;
@@ -156,6 +174,7 @@
     opacity: 0;
   }
 }
+
 .macronutrients-wrapper {
   display: flex;
   flex-direction: column;
@@ -175,7 +194,10 @@
 .macro-controls-column {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.macro-controls-column {
+  margin-top: 2px;
 }
 
 .macro-item {
@@ -183,6 +205,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  padding: 20px;
 }
 
 .macro-title,
@@ -191,12 +214,14 @@
   font-family: 'Poppins', sans-serif;
   font-size: 17px;
   color: #302D40;
+  font-weight: 600;
 }
 
 .macro-controls {
   display: flex;
   align-items: center;
   padding: 5px;
+  margin-top: -9px;
 }
 
 .macro-controls button {
@@ -234,8 +259,8 @@
     margin: 10px;
     max-width: 90%;
   }
-  .down-arrow-icon{
-    display: hidden;
+  .down-arrow-icon {
+    display: none;
   }
 
   .restaurant-title {
@@ -254,7 +279,6 @@
     height: auto;
   }
 
-
   .food-title,
   .food-price,
   .food-calories,
@@ -272,18 +296,13 @@
     height: 30px;
   }
 
-  .down-arrow-icon {
-    width: 24px;
-    height: 24px;
-  }
-
   .macronutrients-wrapper {
     padding-left: 30px;
   }
   .macro-title,
   .macro-additional,
   .macro-value,
-  .macro-additional-value  {
+  .macro-additional-value {
     font-size: 14px;
   }
 }
@@ -295,6 +314,9 @@
   }
   .restaurant-title {
     font-size: 24px;
+  }
+  .down-arrow-icon {
+    display: none;
   }
 
   .food-item {
@@ -326,11 +348,6 @@
     height: 24px;
   }
 
-  .down-arrow-icon {
-    width: 30px;
-    height: 30px;
-  }
-
   .macronutrients-wrapper {
     padding-left: 20px;
   }
@@ -338,7 +355,7 @@
   .macro-title,
   .macro-additional,
   .macro-value,
-  .macro-additional-value  {
+  .macro-additional-value {
     font-size: 12px;
   }
 
@@ -366,7 +383,6 @@
     width: 100%;
     height: auto;
   }
-
 
   .food-title,
   .food-price,
@@ -398,7 +414,7 @@
   .macro-title,
   .macro-additional,
   .macro-value,
-  .macro-additional-value  {
+  .macro-additional-value {
     font-size: 10px;
   }
 

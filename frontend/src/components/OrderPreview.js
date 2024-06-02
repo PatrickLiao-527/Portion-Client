@@ -1,92 +1,95 @@
 // src/components/OrderPreview.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
+import { createOrder } from '../services/api';
 import '../assets/styles/OrderPreview.css';
 
-const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, proteinsCost, fats, fatsCost, additionalNotes, subTotal, deliveryFees, serviceFees, taxes, total }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [notes, setNotes] = useState(additionalNotes);
+const OrderPreview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [notes, setNotes] = useState('');
+  const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
 
-  const handleEditClick = () => {
-    setIsEditing(!isEditing);
-  };
+  const handleCheckout = async () => {
+    const orderDetails = cartItems.map(item => ({
+      foodItem: item.foodItem,
+      carbohydrates: item.carbohydrates,
+      proteins: item.proteins,
+      price: item.price,
+    }));
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      setIsEditing(false);
+    const orderData = {
+      items: orderDetails,
+      additionalNotes: notes,
+      subTotal: cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2),
+      totalCalories: cartItems.reduce((acc, item) => acc + item.calories, 0),
+    };
+
+    try {
+      await createOrder(orderData);
+      clearCart();
+      navigate('/order-confirmation');
+    } catch (error) {
+      console.error('Error creating order:', error);
     }
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const renderOrderPreview = () => {
+    const subTotal = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+    const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  const handleCheckout = () => {
-    navigate('/order-confirmation');
-  };
-  const renderOrderPreview = () => (
-    <div className="order-preview">
-      <div className="order-preview-header">
-        <h1>{orderTitle}</h1>
-      </div>
-      <div className="macro-nutrients">
-        <div className="nutrient-column">
-          <span>Carbohydrates</span>
-          <span>Proteins</span>
-          <span>Fats</span>
+    return (
+      <div className="order-preview">
+        <h1>Order Preview</h1>
+        {cartItems.map((item, index) => (
+          <div key={index} className="order-item">
+            <div className="order-preview-header">
+              <h2>{item.foodItem}</h2>
+            </div>
+            <div className="macro-nutrients">
+              <div className="nutrient-column">
+                <span>Carbohydrates: {item.carbohydrates}g</span>
+                <span>Proteins: {item.proteins}g</span>
+                <span>Fats: {item.fats}g</span>
+              </div>
+              <div className="value-column">
+                <span>${(item.carbohydrates * item.carbsPrice).toFixed(2)}</span>
+                <span>${(item.proteins * item.proteinsPrice).toFixed(2)}</span>
+                <span>${(item.fats * item.fatsPrice).toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="additional-notes">
+          <input
+            type="text"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            className="editable-input notes-input"
+            placeholder="Enter additional notes"
+          />
         </div>
-        <div className="value-column">
-          <span>{carbohydrates}g</span>
-          <span>{proteins}g</span>
-          <span>{fats}g</span>
+        <div className="thin-line"></div>
+        <div className="order-summary">
+          <div className="summary-line">
+            <span>Sub Total</span>
+            <span>${subTotal}</span>
+          </div>
+          <div className="summary-line">
+            <span>Total Calories</span>
+            <span>{totalCalories}</span>
+          </div>
         </div>
-        <div className="adjusted-price-column">
-          <span>${carbohydratesCost}</span>
-          <span>${proteinsCost}</span>
-          <span>${fatsCost}</span>
-        </div>
-      </div>
-      <div className="additional-notes">
-        <input
-          type="text"
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          className="editable-input notes-input"
-          placeholder="Enter additional notes"
-        />
-      </div>
-      <div className="thin-line"></div>
-      <div className="order-summary">
-        <div className="summary-line">
-          <span>Sub Total</span>
+        <div className="thin-line"></div>
+        <div className="total-line">
+          <span>Total</span>
           <span>${subTotal}</span>
         </div>
-        <div className="summary-line">
-          <span>Delivery Fees</span>
-          <span>${deliveryFees}</span>
-        </div>
-        <div className="summary-line">
-          <span>Service Fees</span>
-          <span>${serviceFees}</span>
-        </div>
-        <div className="summary-line">
-          <span>Taxes</span>
-          <span>${taxes}</span>
-        </div>
+        <button className="checkout-button" onClick={handleCheckout}>Order and checkout</button>
       </div>
-      <div className="thin-line"></div>
-      <div className="total-line">
-        <span>Total</span>
-        <span>${total}</span>
-      </div>
-      <button className="checkout-button" onClick={handleCheckout}>Order and checkout</button>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
@@ -94,11 +97,11 @@ const OrderPreview = ({ orderTitle, carbohydrates, carbohydratesCost, proteins, 
         {renderOrderPreview()}
       </div>
       <div className="order-preview-mobile">
-        <button onClick={openModal} className="open-modal-button">View Order</button>
+        <button onClick={() => setIsModalOpen(true)} className="open-modal-button">View Order</button>
         {isModalOpen && (
           <div className="modal">
             <div className="modal-content">
-              <span className="close-button" onClick={closeModal}>&times;</span>
+              <span className="close-button" onClick={() => setIsModalOpen(false)}>&times;</span>
               {renderOrderPreview()}
             </div>
           </div>

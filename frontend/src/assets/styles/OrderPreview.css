@@ -13,17 +13,6 @@
   margin-bottom: 10px; 
 }
 
-.edit-button {
-  font-family: 'Poppins', sans-serif;
-  background: #302D40;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
 .macro-nutrients {
   display: flex;
   justify-content: space-between;
