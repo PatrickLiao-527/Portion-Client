@@ -16,16 +16,28 @@ const OrderPreview = () => {
       foodItem: item.foodItem,
       carbohydrates: item.carbohydrates,
       proteins: item.proteins,
+      fats: item.fats, // Include fats field
       price: item.price,
     }));
+  
+    const subTotal = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+    const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
+    const orderItem = cartItems[0];
 
     const orderData = {
-      items: orderDetails,
-      additionalNotes: notes,
-      subTotal: cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2),
-      totalCalories: cartItems.reduce((acc, item) => acc + item.calories, 0),
+      ...orderItem, // Spread the orderItem object
+      // Adding required fields for the order
+      customerName: 'anonymous', // Set customer name as 'anonymous' for now
+      time: new Date(), // Set current time as the order time
+      amount: parseFloat(orderItem.price.toFixed(2)), // Set the order amount as the price
+      paymentType: 'In_Person', // Set payment type as 'In_Person'
+      status: 'In Progress', // Set status as 'In Progress' initially
+      mealName: orderItem.foodItem, 
+      carbs: orderItem.carbohydrates,
+      proteins: orderItem.proteins,
+      fats: orderItem.fats
     };
-
+  
     try {
       await createOrder(orderData);
       clearCart();
@@ -34,7 +46,6 @@ const OrderPreview = () => {
       console.error('Error creating order:', error);
     }
   };
-
   const renderOrderPreview = () => {
     const subTotal = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
     const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
