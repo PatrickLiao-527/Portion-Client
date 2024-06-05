@@ -30,7 +30,7 @@ const OrderPreview = () => {
       customerName: 'anonymous', // Set customer name as 'anonymous' for now
       time: new Date(), // Set current time as the order time
       amount: parseFloat(orderItem.price.toFixed(2)), // Set the order amount as the price
-      paymentType: 'In_Person', // Set payment type as 'In_Person'
+      paymentType: 'In Person', // Set payment type as 'In Person'
       status: 'In Progress', // Set status as 'In Progress' initially
       mealName: orderItem.foodItem, 
       carbs: orderItem.carbohydrates,

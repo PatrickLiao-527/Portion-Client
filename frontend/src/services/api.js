@@ -10,7 +10,7 @@ const PUBLIC_USER_PASSWORD = 'password123';
 
 const authenticateUser = async () => {
   try {
-    await axios.post(`${BASE_URL}/auth`, {
+    await axios.post(`${BASE_URL}/auth/login`, {
       email: PUBLIC_USER_EMAIL,
       password: PUBLIC_USER_PASSWORD
     }, { withCredentials: true });

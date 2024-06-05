@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import GlobalStyle from './GlobalStyle';
 import SignUpModal from './components/SignUpModal';
 import SignUpWithEmail from './components/SignUpWithEmail';
 import OrderPage from './components/OrderPage';
@@ -35,7 +34,6 @@ function App() {
 
   return (
     <Router>
-      <GlobalStyle />
       <div className="App">
         <Header onSignUpClick={openModal} onLoginClick={openLoginModal} />
         {isModalOpen && (
