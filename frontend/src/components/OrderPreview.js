@@ -46,6 +46,7 @@ const OrderPreview = () => {
       console.error('Error creating order:', error);
     }
   };
+
   const renderOrderPreview = () => {
     const subTotal = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
     const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
@@ -77,7 +78,7 @@ const OrderPreview = () => {
             type="text"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="editable-input notes-input"
+            className="notes-input"
             placeholder="Enter additional notes"
           />
         </div>

@@ -29,8 +29,13 @@
 
 .nutrient-column span,
 .value-column span,
-.adjusted-price-column span {
+.adjusted-price-column span,
+.summary-line,
+.total-line{
   margin: 5px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600; 
 }
 
 .nutrient-column span {
@@ -40,10 +45,12 @@
 .adjusted-price-column span {
   margin: 12px 0;
 }
-.value-column span{
+
+.value-column span {
   border: 1px solid #302D40;
   border-radius: 20px;
   padding: 5px 10px;
+  
 }
 
 
@@ -60,7 +67,7 @@
 }
 
 .notes-input {
-  width: 100%;
+  width: 90%;
   display: block;
   margin: 10px 0;
   padding-left: 10px;
@@ -124,9 +131,6 @@
   z-index: 1000;
   bottom: 10%;
 }
-.order-preview-header{
-  margin-bottom: 10px;
-}
 
 .modal-content {
   background: #fff;
@@ -137,7 +141,6 @@
   height: auto;
   transform: translateX(-50%);
 }
-
 
 .close-button {
   position: absolute;
