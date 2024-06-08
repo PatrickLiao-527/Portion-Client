@@ -1,16 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import '../assets/styles/CategoryScroll.css';
 import chevronLeft from '../assets/images/chevronLeft_icon.svg';
 import chevronRight from '../assets/images/chevronRight_icon.svg';
 
-const CategoryScroll = ({ categories }) => {
+const CategoryScroll = ({ categories, selectedCategory, onCategoryClick }) => {
   const scrollContainerRef = useRef(null);
   const [visibleItems, setVisibleItems] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const calculateVisibleItems = () => {
+  // Calculate the number of visible items in the scroll container
+  const calculateVisibleItems = useCallback(() => {
     if (scrollContainerRef.current && !isMobile) {
       const containerWidth = scrollContainerRef.current.offsetWidth - 80; // Subtract width for chevrons
       let totalWidth = 0;
@@ -42,20 +42,19 @@ const CategoryScroll = ({ categories }) => {
 
       setVisibleItems(itemsVisible);
     }
-  };
+  }, [categories, startIndex, isMobile]);
 
+  // Scroll left by adjusting the start index
   const scrollLeft = () => {
     setStartIndex(prevIndex => Math.max(prevIndex - visibleItems.length, 0));
   };
 
+  // Scroll right by adjusting the start index
   const scrollRight = () => {
     setStartIndex(prevIndex => Math.min(prevIndex + visibleItems.length, categories.length - visibleItems.length));
   };
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
-
+  // Handle resize events and recalculate visible items
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -64,7 +63,7 @@ const CategoryScroll = ({ categories }) => {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [categories, startIndex, isMobile]);
+  }, [categories, startIndex, isMobile, calculateVisibleItems]);
 
   return (
     <div className="category-scroll-container">
@@ -77,8 +76,8 @@ const CategoryScroll = ({ categories }) => {
         {categories.slice(isMobile ? 0 : startIndex, isMobile ? categories.length : startIndex + visibleItems.length).map((category, index) => (
           <div
             key={index}
-            className={`category-item ${category === selectedCategory ? 'selected' : ''}`}
-            onClick={() => handleCategoryClick(category)}
+            className={`category-item ${category._id === selectedCategory._id ? 'selected' : ''}`}
+            onClick={() => onCategoryClick(category)}
           >
             {category.name}
           </div>

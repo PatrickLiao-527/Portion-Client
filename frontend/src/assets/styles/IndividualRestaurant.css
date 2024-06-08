@@ -107,14 +107,6 @@
   text-align: right; /* Align text to the right */
 }
 
-.food-ingredients {
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
-  color: #302D40;
-  margin-top: 10px;
-  font-weight: 600;
-}
-
 .cart-icon-container {
   position: absolute;
   right: 0px;
@@ -137,7 +129,8 @@
 
 .down-arrow-icon {
   position: absolute;
-  top: 150px;
+  top: 38%;
+  right: -5%;
   width: 100%;
   height: auto;
   transition: transform 0.3s;

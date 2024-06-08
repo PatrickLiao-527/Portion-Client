@@ -1,4 +1,3 @@
-// src/components/OrderPreview.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
@@ -8,36 +7,35 @@ import '../assets/styles/OrderPreview.css';
 const OrderPreview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState('');
+  const [pickupTime, setPickupTime] = useState({ hour: '', minute: '00', period: 'AM' });
   const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
-    const orderDetails = cartItems.map(item => ({
-      foodItem: item.foodItem,
-      carbohydrates: item.carbohydrates,
-      proteins: item.proteins,
-      fats: item.fats, // Include fats field
-      price: item.price,
-    }));
-  
-    const subTotal = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
-    const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
+    if (cartItems.length === 0) {
+      console.error('No items in the cart.');
+      return;
+    }
+
     const orderItem = cartItems[0];
 
     const orderData = {
-      ...orderItem, // Spread the orderItem object
-      // Adding required fields for the order
-      customerName: 'anonymous', // Set customer name as 'anonymous' for now
-      time: new Date(), // Set current time as the order time
-      amount: parseFloat(orderItem.price.toFixed(2)), // Set the order amount as the price
-      paymentType: 'In Person', // Set payment type as 'In Person'
-      status: 'In Progress', // Set status as 'In Progress' initially
-      mealName: orderItem.foodItem, 
+      customerName: 'anonymous',
+      time: new Date(),
+      amount: parseFloat(orderItem.price.toFixed(2)),
+      paymentType: 'In Person',
+      status: 'In Progress',
+      details: notes,
+      ownerId: orderItem.ownerId,
+      mealName: orderItem.foodItem,
       carbs: orderItem.carbohydrates,
       proteins: orderItem.proteins,
-      fats: orderItem.fats
+      fats: orderItem.fats,
+      pickupTime: `${pickupTime.hour}:${pickupTime.minute} ${pickupTime.period}`,
     };
-  
+
+    console.log('Creating an order with:', JSON.stringify(orderData, null, 2));
+
     try {
       await createOrder(orderData);
       clearCart();
@@ -81,6 +79,42 @@ const OrderPreview = () => {
             className="notes-input"
             placeholder="Enter additional notes"
           />
+        </div>
+        <div className="thin-line"></div>
+        <div className="pickup-time">
+          <label htmlFor="pickup-time-hour">Pickup Time:</label>
+          <div className="time-inputs">
+            <input
+              type="number"
+              id="pickup-time-hour"
+              value={pickupTime.hour}
+              onChange={(e) => setPickupTime({ ...pickupTime, hour: e.target.value })}
+              className="time-input"
+              placeholder="HH"
+              min="1"
+              max="12"
+            />
+            :
+            <select
+              id="pickup-time-minute"
+              value={pickupTime.minute}
+              onChange={(e) => setPickupTime({ ...pickupTime, minute: e.target.value })}
+              className="time-input"
+            >
+              <option value="00">00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
+            </select>
+            <select
+              value={pickupTime.period}
+              onChange={(e) => setPickupTime({ ...pickupTime, period: e.target.value })}
+              className="time-period-select"
+            >
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
         </div>
         <div className="thin-line"></div>
         <div className="order-summary">
