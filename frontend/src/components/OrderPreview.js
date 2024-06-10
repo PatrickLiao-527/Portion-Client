@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import { AuthContext } from '../contexts/AuthContext';
 import { createOrder } from '../services/api';
 import '../assets/styles/OrderPreview.css';
 
@@ -10,6 +11,7 @@ const OrderPreview = () => {
   const [pickupTime, setPickupTime] = useState({ hour: '', minute: '00', period: 'AM' });
   const [warningMessage, setWarningMessage] = useState('');
   const { cartItems, clearCart, removeItemFromCart } = useCart();
+  const { user } = useContext(AuthContext); // Access user context
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const OrderPreview = () => {
     const formattedNotes = `Additional notes from customer: ${notes}, Desired pickup time: ${pickupTime.hour}:${pickupTime.minute} ${pickupTime.period}`;
 
     const orderData = {
-      customerName: 'anonymous',
+      customerName: user ? user.name : 'anonymous', // Use user's name if logged in, otherwise 'anonymous'
       time: new Date(),
       amount: parseFloat(orderItem.price.toFixed(2)), // Ensure amount is correctly parsed as a number
       paymentType: 'In Person',

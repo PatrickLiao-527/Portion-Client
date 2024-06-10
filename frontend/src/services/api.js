@@ -94,3 +94,42 @@ export const fetchCategories = async () => {
     throw error;
   }
 };
+
+export const signupUser = async (userData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error during signup:', error);
+    throw error;
+  }
+};
+export const loginUser = async (userData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error during login:', error);
+    throw error;
+  }
+};

@@ -1,6 +1,7 @@
 // src/components/Header.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 import '../assets/styles/Header.css';
 import hamburgerIcon from '../assets/images/hamburger.svg';
 import logo from '../assets/images/Portion-Logo.png';
@@ -9,6 +10,7 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
   const [isMobileNavVisible, setMobileNavVisible] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
   useEffect(() => {
     const path = location.pathname;
@@ -23,6 +25,11 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
 
   const toggleMobileNav = () => {
     setMobileNavVisible(!isMobileNavVisible);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setActiveLink('Home');
   };
 
   return (
@@ -45,8 +52,17 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
             <Link to="/contact-us" onClick={() => setActiveLink('Contact Us')} className={activeLink === 'Contact Us' ? 'active' : ''}>Contact Us</Link>
           </div>
           <div className="auth-buttons">
-            <button className="auth-button" onClick={onLoginClick}>Log in</button>
-            <button className="auth-button primary" onClick={onSignUpClick}>Sign up</button>
+            {user ? (
+              <>
+                <span className="greeting">Hello, {user.name || user.email}</span>
+                <button className="auth-button" onClick={handleLogout}>Logout</button>
+              </>
+            ) : (
+              <>
+                <button className="auth-button" onClick={onLoginClick}>Log in</button>
+                <button className="auth-button primary" onClick={onSignUpClick}>Sign up</button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -55,8 +71,14 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
           <Link to="/" onClick={() => { setActiveLink('Home'); setMobileNavVisible(false); }} className={activeLink === 'Home' ? 'active' : ''}>Home</Link>
           <Link to="/order" onClick={() => { setActiveLink('Order'); setMobileNavVisible(false); }} className={activeLink === 'Order' ? 'active' : ''}>Order</Link>
           <Link to="/contact-us" onClick={() => { setActiveLink('Contact Us'); setMobileNavVisible(false); }} className={activeLink === 'Contact Us' ? 'active' : ''}>Contact Us</Link>
-          <button className="auth-button" onClick={() => { onLoginClick(); setMobileNavVisible(false); }}>Log in</button>
-          <button className="auth-button" onClick={() => { onSignUpClick(); setMobileNavVisible(false); }}>Sign up</button>
+          {user ? (
+            <button className="auth-button" onClick={() => { handleLogout(); setMobileNavVisible(false); }}>Logout</button>
+          ) : (
+            <>
+              <button className="auth-button" onClick={() => { onLoginClick(); setMobileNavVisible(false); }}>Log in</button>
+              <button className="auth-button" onClick={() => { onSignUpClick(); setMobileNavVisible(false); }}>Sign up</button>
+            </>
+          )}
         </div>
       )}
     </>

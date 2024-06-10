@@ -1,5 +1,6 @@
 // src/components/SignupWithEmail.js
 import React, { useState } from 'react';
+import { signupUser } from '../services/api';
 import '../assets/styles/SignUpWithEmail.css';
 import showHideIcon from '../assets/images/showHide_icon.png';
 
@@ -8,10 +9,26 @@ const SignupWithEmail = ({ onClose, onLoginClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSignup = (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
-    // Add your signup logic here
+    try {
+      const userData = {
+        name: profileName,
+        email,
+        password,
+        role: 'client', // Assuming this is for the client signup
+        restaurantName: '', // Set these to empty strings for client role
+        restaurantCategory: '' // Set these to empty strings for client role
+      };
+      const response = await signupUser(userData);
+      console.log('Signup successful:', response);
+      onClose(); // Close the modal on successful signup
+    } catch (error) {
+      setError('Signup failed. Please try again.');
+      console.error('Signup error:', error);
+    }
   };
 
   return (
@@ -22,6 +39,7 @@ const SignupWithEmail = ({ onClose, onLoginClick }) => {
         <p className="signup-subtitle">
           Already have an account? <span className="login-link" onClick={() => { onLoginClick(); onClose(); }}>Log in</span>
         </p>
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSignup}>
           <div className="form-group-signup">
             <label>What should we call you?</label>

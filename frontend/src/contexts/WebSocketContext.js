@@ -1,47 +1,38 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+// WebSocketContext.jsx
+import React, { createContext, useEffect, useState } from 'react';
 
-const WebSocketContext = createContext(null);
-
-export const useWebSocket = () => {
-  return useContext(WebSocketContext);
-};
+export const WebSocketContext = createContext(null);
 
 export const WebSocketProvider = ({ children }) => {
-  const [ws, setWs] = useState(null);
-
-  const socket = useMemo(() => new WebSocket('ws://localhost:8080'), []);
+  const [socket, setSocket] = useState(null);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    if (socket) {
-      socket.onopen = () => {
-        console.log('Connected to WebSocket server');
-        setWs(socket);
-      };
-
-      socket.onmessage = (message) => {
-        console.log('WebSocket message received:', message);
-        // Handle incoming messages here
-      };
-
-      socket.onclose = (event) => {
-        console.log('Disconnected from WebSocket server');
-        console.log(`Code: ${event.code}, Reason: ${event.reason}`);
-      };
-
-      socket.onerror = (error) => {
-        console.error('WebSocket error:', error);
-      };
-
-      return () => {
-        if (socket.readyState === 1) { // Check if socket is open
-          socket.close();
-        }
-      };
-    }
-  }, [socket]);
+    const ws = new WebSocket('ws://localhost:8080');
+    
+    ws.onopen = () => {
+      console.log('WebSocket connection established');
+    };
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log('WebSocket message received:', data);
+      setNotifications(prevNotifications => [...prevNotifications, data]);
+    };
+    
+    ws.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+    
+    setSocket(ws);
+    
+    return () => {
+      ws.close();
+    };
+  }, []);
 
   return (
-    <WebSocketContext.Provider value={ws}>
+    <WebSocketContext.Provider value={{ socket, notifications }}>
       {children}
     </WebSocketContext.Provider>
   );
