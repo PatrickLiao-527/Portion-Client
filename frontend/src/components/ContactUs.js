@@ -13,7 +13,7 @@ const ContactUs = () => {
   return (
     <div className="contact-us-container">
       <h1 className="contact-title">Contact Us</h1>
-      <p className="contact-subtitle">Patrick f**ked something up? Js call him!</p>
+      <p className="contact-subtitle">Patrick messed something up? Js call him!</p>
       <div className="contact-content">
         <div className="contact-info">
           <h2 className="contact-info-title">Contact Information</h2>

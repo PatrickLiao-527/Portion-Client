@@ -3,13 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { createOrder } from '../services/api';
+import SignupWithEmail from '../components/SignUpWithEmail';
+import LoginModal from '../components/LoginModal'; // Import the LoginModal
 import '../assets/styles/OrderPreview.css';
 
 const OrderPreview = () => {
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false); // State to manage signup modal visibility
+  const [signupModalContext, setSignupModalContext] = useState(''); // State to manage signup modal context
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State to manage login modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState('');
   const [pickupTime, setPickupTime] = useState({ hour: '', minute: '00', period: 'AM' });
-  const [warningMessage, setWarningMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState(''); // State to manage warning messages
+  const [cartItemWarning, setCartItemWarning] = useState(''); // State to manage cart item warning
   const { cartItems, clearCart, removeItemFromCart } = useCart();
   const { user } = useContext(AuthContext); // Access user context
   const navigate = useNavigate();
@@ -31,9 +37,27 @@ const OrderPreview = () => {
     }
   }, [cartItems]);
 
+  useEffect(() => {
+    // Clear the cart item warning when the cart changes
+    if (cartItems.length < 2) {
+      setCartItemWarning('');
+    }
+  }, [cartItems]);
+
   const handleCheckout = async () => {
+    if (cartItems.length >= 2) {
+      setCartItemWarning('⚠️ You can only add up to 1 item in the cart.');
+      return;
+    }
+
     if (cartItems.length === 0) {
-      console.error('No items in the cart.');
+      setWarningMessage('⚠️ Your cart is empty. Please add items to proceed.');
+      return;
+    }
+
+    if (!user) {
+      setSignupModalContext('checkout'); // Set context to 'checkout'
+      setIsSignupModalOpen(true); // Show signup modal if the user is not logged in
       return;
     }
 
@@ -85,6 +109,11 @@ const OrderPreview = () => {
     validatePickupTime(newPickupTime.hour, newPickupTime.minute, newPickupTime.period);
   };
 
+  const handleLoginClick = () => {
+    setIsSignupModalOpen(false); // Close the signup modal
+    setIsLoginModalOpen(true); // Open the login modal
+  };
+
   const renderOrderPreview = () => {
     const subTotal = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
     const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
@@ -96,7 +125,15 @@ const OrderPreview = () => {
           <div key={index} className="order-item">
             <div className="order-preview-header">
               <h2>{item.foodItem}</h2>
-              <span className="remove-button" onClick={() => removeItemFromCart(index)}>Remove</span>
+              <span
+                className="remove-button"
+                onClick={() => {
+                  removeItemFromCart(index);
+                  setCartItemWarning(''); // Clear the cart item warning
+                }}
+              >
+                Remove
+              </span>
             </div>
             <div className="macro-nutrients">
               <div className="nutrient-column">
@@ -124,7 +161,7 @@ const OrderPreview = () => {
         {cartItems.length > 0 && (
           <>
             <div className="thin-line"></div>
-            {warningMessage && <div className="warning-message">{warningMessage}</div>}
+            {cartItemWarning && <div className="warning-message">{cartItemWarning}</div>}
             <div className="pickup-time">
               <label htmlFor="pickup-time-hour">Pickup Time:</label>
               <div className="time-inputs">
@@ -183,6 +220,7 @@ const OrderPreview = () => {
           <span>${subTotal}</span>
         </div>
         <button className="checkout-button" onClick={handleCheckout}>Order and checkout</button>
+        {warningMessage && <div className="warning-message">{warningMessage}</div>}
       </div>
     );
   };
@@ -203,6 +241,22 @@ const OrderPreview = () => {
           </div>
         )}
       </div>
+      {isSignupModalOpen && (
+        <SignupWithEmail
+          onClose={() => setIsSignupModalOpen(false)}
+          onLoginClick={handleLoginClick}
+          context={signupModalContext} // Pass context as a prop
+        />
+      )}
+      {isLoginModalOpen && (
+        <LoginModal
+          onClose={() => setIsLoginModalOpen(false)}
+          onSignUpClick={() => {
+            setIsLoginModalOpen(false);
+            setIsSignupModalOpen(true);
+          }}
+        />
+      )}
     </>
   );
 };

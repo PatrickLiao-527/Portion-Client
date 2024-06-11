@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import SignUpModal from './components/SignUpModal';
-import SignUpWithEmail from './components/SignUpWithEmail';
+import SignUpModal from './components/SignUpWithEmail';
 import OrderPage from './components/OrderPage';
 import HomePage from './components/HomePage';
 import ContactUsPage from './components/ContactUs';
@@ -43,7 +42,7 @@ function App() {
             onLoginClick={openLoginModal}
           />
         )}
-        {isEmailModalOpen && <SignUpWithEmail onClose={closeEmailModal} onLoginClick={openLoginModal} />}
+        {isEmailModalOpen && <SignUpModal onClose={closeEmailModal} onLoginClick={openLoginModal} />}
         {isLoginModalOpen && <LoginModal onClose={closeLoginModal} onSignUpClick={openSignUpModal} />}
         <Routes>
           <Route path="/" element={<HomePage />} />
