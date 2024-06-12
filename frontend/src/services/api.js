@@ -39,10 +39,10 @@ export const fetchRestaurantById = async (restaurantId) => {
   }
 };
 
-export const fetchMenuItems = async (ownerId) => {
+export const fetchMenuItems = async (restaurantId) => {
   try {
-    console.log(`Using fetch Menu Items api for restaurant with ownerID: ${ownerId}`)
-    const response = await fetch(`${BASE_URL}/menus/restaurant/${ownerId}`, {
+    console.log(`Using fetch Menu Items API for restaurant with ID: ${restaurantId}`);
+    const response = await fetch(`${BASE_URL}/restaurants/${restaurantId}/menu-items`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -114,6 +114,7 @@ export const signupUser = async (userData) => {
     throw error;
   }
 };
+
 export const loginUser = async (userData) => {
   try {
     const response = await fetch(`${BASE_URL}/auth/login`, {
