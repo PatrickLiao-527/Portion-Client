@@ -8,6 +8,7 @@ import HomePage from './components/HomePage';
 import ContactUsPage from './components/ContactUs';
 import LoginModal from './components/LoginModal';
 import OrderConfirmation from './components/OrderConfirmation';
+import { Helmet } from "react-helmet"
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,6 +35,9 @@ function App() {
   return (
     <Router>
       <div className="App">
+      <Helmet>
+        <title>Portion</title>
+      </Helmet>
         <Header onSignUpClick={openModal} onLoginClick={openLoginModal} />
         {isModalOpen && (
           <SignUpModal
