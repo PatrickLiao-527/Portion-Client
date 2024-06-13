@@ -39,7 +39,7 @@ const SignupWithEmail = ({ onClose, onLoginClick, context }) => { // Receive con
         {isSuccess ? (
           <div className="success-message">
             <h2 className="signup-title">Signup Successful!</h2>
-            <p>Your account has been created successfully. You can now log in.</p>
+            <p className = "signup-success-text">Your account has been created successfully. You can now log in.</p>
             <button className="success-button" onClick={onClose}>Close</button>
           </div>
         ) : (

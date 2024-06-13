@@ -102,10 +102,28 @@
   margin-top: 20px;
   transition: background-color 0.3s, color 0.3s;
 }
-
+.success-button{
+  background: #302D40;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  margin: 20px auto 0;
+  width: 100%;
+}
 .signup-button:hover {
   background-color: #111111; /* Change background color on hover */
   color: #FFFFFF; /* Change text color on hover */
+}
+.signup-success-text{
+  font-weight: 600;
+  font-size:17px;
+
 }
 
 .close-button-modal {

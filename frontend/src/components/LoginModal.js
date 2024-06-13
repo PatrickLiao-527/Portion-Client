@@ -1,4 +1,3 @@
-// src/components/LoginModal.js
 import React, { useState, useContext } from 'react';
 import { loginUser } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
