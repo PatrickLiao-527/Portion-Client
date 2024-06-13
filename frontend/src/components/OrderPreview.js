@@ -66,6 +66,7 @@ const OrderPreview = () => {
 
     const orderData = {
       customerName: user ? user.name : 'anonymous', // Use user's name if logged in, otherwise 'anonymous'
+      userEmail: user ? user.email : 'anonymous@domain.com', // Use user's email if logged in, otherwise a placeholder
       time: new Date(),
       amount: parseFloat(orderItem.price.toFixed(2)), // Ensure amount is correctly parsed as a number
       paymentType: 'In Person',

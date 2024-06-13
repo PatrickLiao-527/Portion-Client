@@ -1,0 +1,171 @@
+/* src/assets/styles/OrderStatus.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.order-status-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #111111;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #111111;
+}
+
+h3 {
+  font-size: 20px;
+  color: #111111;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-status-item {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.order-status-item:hover {
+  transform: scale(1.02);
+}
+
+.order-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.order-summary .food-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-summary .details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.order-details {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666666;
+}
+
+.order-details p {
+  margin: 5px 0;
+}
+
+.order-details .detail-label {
+  font-weight: 600;
+  color: #111111;
+}
+
+.current-orders {
+  margin-bottom: 40px;
+}
+
+.current-orders h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: left; /* Align left */
+}
+
+.past-orders h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: left; /* Align left */
+}
+
+.order-list .no-orders {
+  font-size: 18px;
+  color: #999999;
+  text-align: center;
+}
+
+.order-status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 5px; /* Add margin to align with the food name */
+}
+
+.order-status.in-progress {
+  background-color: #f0ad4e; /* Yellow background */
+}
+
+.order-status.complete {
+  background-color: #5cb85c; /* Green background */
+}
+
+.order-status.cancelled {
+  background-color: #d9534f; /* Red background */
+}
+
+@media (max-width: 768px) {
+  .order-status-container {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .order-summary {
+    font-size: 16px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  }
+
+  .order-details {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-status-container {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .order-summary {
+    font-size: 14px;
+  }
+
+  .order-details {
+    font-size: 12px;
+  }
+}

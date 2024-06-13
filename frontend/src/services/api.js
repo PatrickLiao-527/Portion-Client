@@ -152,4 +152,24 @@ export const sendContactMessage = async (contactData) => {
     console.error('Error sending contact message:', error);
     throw error;
   }
+  
+};
+
+export const fetchUserOrders = async (email) => {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/customer/${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching user orders:', error);
+    throw error;
+  }
 };

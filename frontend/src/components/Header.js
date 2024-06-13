@@ -1,16 +1,19 @@
-// src/components/Header.js
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import '../assets/styles/Header.css';
 import hamburgerIcon from '../assets/images/hamburger.svg';
 import logo from '../assets/images/Portion-Logo.png';
+import downArrowIcon from '../assets/images/chevronDown_icon.svg';
 
 const Header = ({ onSignUpClick, onLoginClick }) => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
   const [isMobileNavVisible, setMobileNavVisible] = useState(false);
   const { user, logout } = useContext(AuthContext);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const path = location.pathname;
@@ -23,6 +26,19 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
     }
   }, [location]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const toggleMobileNav = () => {
     setMobileNavVisible(!isMobileNavVisible);
   };
@@ -30,6 +46,10 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
   const handleLogout = () => {
     logout();
     setActiveLink('Home');
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -53,10 +73,18 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
           </div>
           <div className="auth-buttons">
             {user ? (
-              <>
-                <span className="greeting">Hello, {user.name || user.email}</span>
-                <button className="auth-button" onClick={handleLogout}>Logout</button>
-              </>
+              <div className="dropdown-wrapper" ref={dropdownRef}>
+                <button className="greeting" onClick={toggleDropdown}>
+                  Hello, {user.name || user.email}
+                  <img src={downArrowIcon} alt="Dropdown" className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`} />
+                </button>
+                {isDropdownOpen && (
+                  <div className="dropdown-menu">
+                    <button className="dropdown-item" onClick={() => navigate('/order-status')}>Order Status</button>
+                    <button className="dropdown-item" onClick={handleLogout}>Logout</button>
+                  </div>
+                )}
+              </div>
             ) : (
               <>
                 <button className="auth-button" onClick={onLoginClick}>Log in</button>

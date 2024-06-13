@@ -8,6 +8,7 @@ import HomePage from './components/HomePage';
 import ContactUsPage from './components/ContactUs';
 import LoginModal from './components/LoginModal';
 import OrderConfirmation from './components/OrderConfirmation';
+import OrderStatus from './components/OrderStatus';
 import { Helmet } from "react-helmet"
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/order" element={<OrderPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} /> 
+          <Route path="/order-status" element={<OrderStatus />} />
         </Routes>
       </div>
     </Router>
