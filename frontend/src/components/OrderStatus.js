@@ -109,7 +109,8 @@ const OrderStatus = () => {
         <div className="order-list">
           {pastOrders.length > 0 ? (
             pastOrders.map((order) => {
-              const { notes, pickupTime } = parseDetails(order.details);
+              const { notes } = parseDetails(order.details);
+              const orderDate = new Date(order.time).toLocaleDateString();
               return (
                 <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
                   <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
@@ -118,7 +119,7 @@ const OrderStatus = () => {
                       <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
                     </div>
                     <div className="details">
-                      <p><strong>Pickup Time:</strong> {pickupTime}</p>
+                      <p><strong>Order Date:</strong> {orderDate}</p>
                       <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
                     </div>
                   </div>
@@ -129,7 +130,7 @@ const OrderStatus = () => {
                       <p><strong>Proteins:</strong> {order.proteins}g</p>
                       <p><strong>Fats:</strong> {order.fats}g</p>
                       <p><strong>Payment Type:</strong> {order.paymentType}</p>
-                      <p><strong>Order Time:</strong> {new Date(order.time).toLocaleString()}</p>
+                      <p><strong>Order Time:</strong> {orderDate}</p>
                     </div>
                   )}
                 </div>
