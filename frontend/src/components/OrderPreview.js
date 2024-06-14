@@ -205,7 +205,7 @@ const OrderPreview = () => {
           </>
         )}
         <div className="thin-line"></div>
-        <div className="order-summary">
+        <div className="order-preview-summary">
           <div className="summary-line">
             <span>Sub Total</span>
             <span>${subTotal}</span>

@@ -138,11 +138,29 @@
   margin-left: 10px;
 }
 
-.order-summary .summary-line,
+.order-preview-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summary-line,
 .total-line {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+}
+
+.summary-line span:first-child,
+.total-line span:first-child {
+  text-align: start;
+  flex: 1;
+}
+
+.summary-line span:last-child,
+.total-line span:last-child {
+  text-align: end;
+  flex: 1;
 }
 
 .thin-line {

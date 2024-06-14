@@ -110,7 +110,9 @@ const OrderStatus = () => {
           {pastOrders.length > 0 ? (
             pastOrders.map((order) => {
               const { notes } = parseDetails(order.details);
-              const orderDate = new Date(order.time).toLocaleDateString();
+              const orderDate = new Date(order.time);
+              const orderDateString = orderDate.toLocaleDateString();
+              const orderDay = orderDate.toLocaleDateString('en-US', { weekday: 'long' });
               return (
                 <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
                   <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
@@ -119,7 +121,7 @@ const OrderStatus = () => {
                       <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
                     </div>
                     <div className="details">
-                      <p><strong>Order Date:</strong> {orderDate}</p>
+                      <p><strong>Order Date:</strong> {orderDateString} ({orderDay})</p>
                       <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
                     </div>
                   </div>
@@ -130,7 +132,7 @@ const OrderStatus = () => {
                       <p><strong>Proteins:</strong> {order.proteins}g</p>
                       <p><strong>Fats:</strong> {order.fats}g</p>
                       <p><strong>Payment Type:</strong> {order.paymentType}</p>
-                      <p><strong>Order Time:</strong> {orderDate}</p>
+                      <p><strong>Order Time:</strong> {orderDateString} ({orderDay})</p>
                     </div>
                   )}
                 </div>
