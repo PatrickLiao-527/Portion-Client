@@ -5,6 +5,8 @@ import '../assets/styles/Header.css';
 import hamburgerIcon from '../assets/images/hamburger.svg';
 import logo from '../assets/images/Portion-Logo.png';
 import downArrowIcon from '../assets/images/chevronDown_icon.svg';
+import { useCart } from '../contexts/CartContext';
+import OrderPreview from './OrderPreview';
 
 const Header = ({ onSignUpClick, onLoginClick }) => {
   const location = useLocation();
@@ -14,6 +16,7 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const { cartItems } = useCart();
 
   useEffect(() => {
     const path = location.pathname;
@@ -46,6 +49,7 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
   const handleLogout = () => {
     logout();
     setActiveLink('Home');
+    setMobileNavVisible(false); // Close the mobile nav after logging out
   };
 
   const toggleDropdown = () => {
@@ -100,7 +104,10 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
           <Link to="/order" onClick={() => { setActiveLink('Order'); setMobileNavVisible(false); }} className={activeLink === 'Order' ? 'active' : ''}>Order</Link>
           <Link to="/contact-us" onClick={() => { setActiveLink('Contact Us'); setMobileNavVisible(false); }} className={activeLink === 'Contact Us' ? 'active' : ''}>Contact Us</Link>
           {user ? (
-            <button className="auth-button" onClick={() => { handleLogout(); setMobileNavVisible(false); }}>Logout</button>
+            <>
+              <Link to="/order-status" onClick={() => setMobileNavVisible(false)} className="auth-button">Order Status</Link>
+              <button className="auth-button" onClick={handleLogout}>Logout</button>
+            </>
           ) : (
             <>
               <button className="auth-button" onClick={() => { onLoginClick(); setMobileNavVisible(false); }}>Log in</button>
@@ -108,6 +115,9 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
             </>
           )}
         </div>
+      )}
+      {cartItems.length > 0 && (
+        <OrderPreview />
       )}
     </>
   );

@@ -62,8 +62,9 @@ const OrderStatus = () => {
     return true;
   };
 
-  const currentOrders = orders.filter(order => order.status === 'In Progress' || isOrderRecent(order));
-  const pastOrders = orders.filter(order => order.status !== 'In Progress' && !isOrderRecent(order));
+  const sortedOrders = orders.sort((a, b) => new Date(b.time) - new Date(a.time));
+  const currentOrders = sortedOrders.filter(order => order.status === 'In Progress' || isOrderRecent(order));
+  const pastOrders = sortedOrders.filter(order => order.status !== 'In Progress' && !isOrderRecent(order));
 
   return (
     <div className="order-status-container">

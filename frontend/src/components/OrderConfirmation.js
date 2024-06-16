@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/styles/OrderConfirmation.css';
 import orderIllustration from '../assets/images/Order-and-CheckOut-image.png';
 
@@ -15,6 +16,9 @@ const OrderConfirmation = () => {
         <img src={orderIllustration} alt="Order Illustration" className="order-illustration" />
       </div>
       <p className="preparing-text">The restaurant is preparing your order.</p>
+      <p className="redirect-text">
+        You can <Link to="/order-status" className="redirect-link">check the status of your order here</Link>
+      </p>
     </div>
   );
 };

@@ -4,20 +4,19 @@ import { useCart } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { createOrder } from '../services/api';
 import SignupWithEmail from '../components/SignUpWithEmail';
-import LoginModal from '../components/LoginModal'; // Import the LoginModal
+import LoginModal from '../components/LoginModal';
 import '../assets/styles/OrderPreview.css';
 
-const OrderPreview = () => {
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false); // State to manage signup modal visibility
-  const [signupModalContext, setSignupModalContext] = useState(''); // State to manage signup modal context
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State to manage login modal visibility
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const OrderPreview = ({ onClose }) => {
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [signupModalContext, setSignupModalContext] = useState('');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [notes, setNotes] = useState('');
   const [pickupTime, setPickupTime] = useState({ hour: '', minute: '00', period: 'AM' });
-  const [warningMessage, setWarningMessage] = useState(''); // State to manage warning messages
-  const [cartItemWarning, setCartItemWarning] = useState(''); // State to manage cart item warning
+  const [warningMessage, setWarningMessage] = useState('');
+  const [cartItemWarning, setCartItemWarning] = useState('');
   const { cartItems, clearCart, removeItemFromCart } = useCart();
-  const { user } = useContext(AuthContext); // Access user context
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +37,6 @@ const OrderPreview = () => {
   }, [cartItems]);
 
   useEffect(() => {
-    // Clear the cart item warning when the cart changes
     if (cartItems.length < 2) {
       setCartItemWarning('');
     }
@@ -56,8 +54,8 @@ const OrderPreview = () => {
     }
 
     if (!user) {
-      setSignupModalContext('checkout'); // Set context to 'checkout'
-      setIsSignupModalOpen(true); // Show signup modal if the user is not logged in
+      setSignupModalContext('checkout');
+      setIsSignupModalOpen(true);
       return;
     }
 
@@ -65,10 +63,10 @@ const OrderPreview = () => {
     const formattedNotes = `Additional notes from customer: ${notes}, Desired pickup time: ${pickupTime.hour}:${pickupTime.minute} ${pickupTime.period}`;
 
     const orderData = {
-      customerName: user ? user.name : 'anonymous', // Use user's name if logged in, otherwise 'anonymous'
-      userEmail: user ? user.email : 'anonymous@domain.com', // Use user's email if logged in, otherwise a placeholder
+      customerName: user ? user.name : 'anonymous',
+      userEmail: user ? user.email : 'anonymous@domain.com',
       time: new Date(),
-      amount: parseFloat(orderItem.price.toFixed(2)), // Ensure amount is correctly parsed as a number
+      amount: parseFloat(orderItem.price.toFixed(2)),
       paymentType: 'In Person',
       status: 'In Progress',
       details: formattedNotes,
@@ -78,8 +76,6 @@ const OrderPreview = () => {
       proteins: orderItem.proteins,
       fats: orderItem.fats,
     };
-
-    console.log('Creating an order with:', JSON.stringify(orderData, null, 2));
 
     try {
       await createOrder(orderData);
@@ -105,14 +101,93 @@ const OrderPreview = () => {
   };
 
   const handleTimeChange = (type, value) => {
-    const newPickupTime = { ...pickupTime, [type]: value };
+    let newHour = parseInt(pickupTime.hour, 10);
+    let newMinute = parseInt(pickupTime.minute, 10);
+    let newPeriod = pickupTime.period;
+
+    if (type === 'hour') {
+      newHour = parseInt(value, 10);
+      if (newHour > 12) {
+        newHour = 1;
+        newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
+      } else if (newHour < 1) {
+        newHour = 12;
+        newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
+      }
+    } else if (type === 'minute') {
+      newMinute = parseInt(value, 10);
+      if (newMinute >= 60) {
+        newMinute = 0;
+        newHour = (newHour % 12) + 1;
+        if (newHour === 12) {
+          newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
+        }
+      } else if (newMinute < 0) {
+        newMinute = 45;
+        newHour = (newHour === 1 ? 12 : newHour - 1);
+        if (newHour === 11) {
+          newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
+        }
+      }
+    } else if (type === 'period') {
+      newPeriod = value;
+    }
+
+    const newPickupTime = {
+      hour: newHour.toString().padStart(2, '0'),
+      minute: newMinute.toString().padStart(2, '0'),
+      period: newPeriod,
+    };
+
     setPickupTime(newPickupTime);
     validatePickupTime(newPickupTime.hour, newPickupTime.minute, newPickupTime.period);
   };
 
+  const handleHourChange = (event) => {
+    let newHour = parseInt(event.target.value, 10);
+    let newPeriod = pickupTime.period;
+    if (event.target.value === '') {
+      setPickupTime({ ...pickupTime, hour: '' });
+      return;
+    }
+    if (newHour > 12) {
+      newHour = 1;
+      newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
+    } else if (newHour < 1) {
+      newHour = 12;
+      newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
+    }
+    setPickupTime({
+      ...pickupTime,
+      hour: newHour.toString().padStart(2, '0'),
+      period: newPeriod,
+    });
+    validatePickupTime(newHour.toString().padStart(2, '0'), pickupTime.minute, newPeriod);
+  };
+
+  const handleMinuteChange = (event) => {
+    let newMinute = parseInt(event.target.value, 10);
+    if (event.target.value === '') {
+      setPickupTime({ ...pickupTime, minute: '' });
+      return;
+    }
+    if (newMinute >= 60) {
+      newMinute = 0;
+      handleHourChange({ target: { value: (parseInt(pickupTime.hour, 10) + 1).toString().padStart(2, '0') } });
+    } else if (newMinute < 0) {
+      newMinute = 45;
+      handleHourChange({ target: { value: (parseInt(pickupTime.hour, 10) === 1 ? 12 : parseInt(pickupTime.hour, 10) - 1).toString().padStart(2, '0') } });
+    }
+    setPickupTime({
+      ...pickupTime,
+      minute: newMinute.toString().padStart(2, '0'),
+    });
+    validatePickupTime(pickupTime.hour, newMinute.toString().padStart(2, '0'), pickupTime.period);
+  };
+
   const handleLoginClick = () => {
-    setIsSignupModalOpen(false); // Close the signup modal
-    setIsLoginModalOpen(true); // Open the login modal
+    setIsSignupModalOpen(false);
+    setIsLoginModalOpen(true);
   };
 
   const renderOrderPreview = () => {
@@ -130,7 +205,7 @@ const OrderPreview = () => {
                 className="remove-button"
                 onClick={() => {
                   removeItemFromCart(index);
-                  setCartItemWarning(''); // Clear the cart item warning
+                  setCartItemWarning('');
                 }}
               >
                 Remove
@@ -170,7 +245,7 @@ const OrderPreview = () => {
                   type="number"
                   id="pickup-time-hour"
                   value={pickupTime.hour}
-                  onChange={(e) => handleTimeChange('hour', e.target.value.padStart(2, '0'))}
+                  onChange={handleHourChange}
                   className="time-input"
                   placeholder="HH"
                   min="1"
@@ -180,7 +255,7 @@ const OrderPreview = () => {
                 <select
                   id="pickup-time-minute"
                   value={pickupTime.minute}
-                  onChange={(e) => handleTimeChange('minute', e.target.value)}
+                  onChange={handleMinuteChange}
                   className="time-input"
                 >
                   <option value="00">00</option>
@@ -222,6 +297,7 @@ const OrderPreview = () => {
         </div>
         <button className="checkout-button" onClick={handleCheckout}>Order and checkout</button>
         {warningMessage && <div className="warning-message">{warningMessage}</div>}
+        {onClose && <span className="close-button" onClick={onClose}>&times;</span>}
       </div>
     );
   };
@@ -232,21 +308,13 @@ const OrderPreview = () => {
         {renderOrderPreview()}
       </div>
       <div className="order-preview-mobile">
-        <button onClick={() => setIsModalOpen(true)} className="open-modal-button">View Order</button>
-        {isModalOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close-button" onClick={() => setIsModalOpen(false)}>&times;</span>
-              {renderOrderPreview()}
-            </div>
-          </div>
-        )}
+        {renderOrderPreview()}
       </div>
       {isSignupModalOpen && (
         <SignupWithEmail
           onClose={() => setIsSignupModalOpen(false)}
           onLoginClick={handleLoginClick}
-          context={signupModalContext} // Pass context as a prop
+          context={signupModalContext}
         />
       )}
       {isLoginModalOpen && (

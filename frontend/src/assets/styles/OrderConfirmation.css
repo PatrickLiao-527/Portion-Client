@@ -1,114 +1,134 @@
 .order-confirmation {
-    text-align: center;
-    padding: 20px;
-  }
-  
+  text-align: center;
+  padding: 20px;
+}
+
+.thank-you-text,
+.preparing-text{
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  color: #302D40;
+}
+.redirect-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: #302D40;
+}
+
+.receipt-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  color: rgba(48, 45, 64, 0.5);
+}
+
+.enter-email {
+  text-decoration: underline;
+  color: #74DC91;
+  cursor: pointer;
+}
+
+.illustration-container {
+  position: relative;
+  margin: 20px 0;
+  margin-left: 60px;
+}
+
+.order-illustration {
+  width: 30%;
+  height: auto;
+}
+
+.emoji {
+  position: absolute;
+}
+
+.heart-emoji {
+  top: 10%;
+  left: 50%;
+  width: 4%;
+  height: auto;
+}
+
+.handsup-emoji {
+  top: 30%;
+  left: 40%;
+  width: 4%;
+  height: auto;
+}
+
+.loving-emoji {
+  top: 50%;
+  left: 55%;
+  width: 4%;
+  height: auto;
+}
+
+.lit-emoji {
+  top: 25%;
+  left: 60%;
+  width: 6%;
+  height: auto;
+}
+
+.surprised-emoji {
+  top: 70%;
+  left: 62%;
+  width: 4%;
+  height: auto;
+}
+
+.redirect-link {
+  color: #74DC91;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.redirect-link:hover {
+  color: #5cbf74;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   .thank-you-text,
-  .preparing-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-    color: #302D40;
-  }
-  
-  .receipt-text {
-    font-family: 'Poppins', sans-serif;
+  .preparing-text{
     font-size: 24px;
-    color: rgba(48, 45, 64, 0.5);
   }
-  
-  .enter-email {
-    text-decoration: underline;
-    color: #74DC91;
-    cursor: pointer;
+  .redirect-text {
+    font-size: 20px;
   }
-  
-  .illustration-container {
-    position: relative;
-    margin: 20px 0;
-    margin-left: 60px;
+  .receipt-text {
+    font-size: 18px;
   }
-  
+
   .order-illustration {
-    width: 30%;
-    height: auto;
+    width: 50%;
   }
-  
+
   .emoji {
-    position: absolute;
+    display: none; /* Hide emojis on smaller screens */
   }
-  
-  .heart-emoji {
-    top: 10%;
-    left: 50%;
-    width: 4%;
-    height: auto;
+}
+
+@media (max-width: 480px) {
+  .thank-you-text,
+  .preparing-text{
+    font-size: 20px;
   }
-  
-  .handsup-emoji {
-    top: 30%;
-    left: 40%;
-    width: 4%;
-    height: auto;
+  .redirect-text {
+    font-size: 18px;
   }
-  
-  .loving-emoji {
-    top: 50%;
-    left: 55%;
-    width: 4%;
-    height: auto;
+
+  .receipt-text {
+    font-size: 16px;
   }
-  
-  .lit-emoji {
-    top: 25%;
-    left: 60%;
-    width: 6%;
-    height: auto;
+
+  .order-illustration {
+    width: 70%;
   }
-  
-  .surprised-emoji {
-    top: 70%;
-    left: 62%;
-    width: 4%;
-    height: auto;
+
+  .emoji {
+    display: none; /* Ensure emojis are hidden on mobile devices */
   }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .thank-you-text,
-    .preparing-text {
-      font-size: 24px;
-    }
-  
-    .receipt-text {
-      font-size: 18px;
-    }
-  
-    .order-illustration {
-      width: 50%;
-    }
-  
-    .emoji {
-      display: none; /* Hide emojis on smaller screens */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .thank-you-text,
-    .preparing-text {
-      font-size: 20px;
-    }
-  
-    .receipt-text {
-      font-size: 16px;
-    }
-  
-    .order-illustration {
-      width: 70%;
-    }
-  
-    .emoji {
-      display: none; /* Ensure emojis are hidden on mobile devices */
-    }
-  }
-  
+}
