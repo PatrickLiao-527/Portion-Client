@@ -17,6 +17,7 @@ const OrderPage = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isOrderPreviewOpen, setIsOrderPreviewOpen] = useState(false);
 
   useEffect(() => {
     // Fetch categories and set default selected category to 'All'
@@ -25,7 +26,6 @@ const OrderPage = () => {
         const allCategories = [{ _id: 'all', name: 'All' }, ...data];
         setCategories(allCategories);
         setSelectedCategory(allCategories[0]); // Set default selected category
-        //console.log('Fetched categories:', allCategories);
       })
       .catch((error) => console.error('Error fetching categories:', error));
 
@@ -34,8 +34,6 @@ const OrderPage = () => {
       .then((data) => {
         setRestaurants(data);
         setFilteredRestaurants(data); // Initialize with all restaurants
-        //console.log('Fetched restaurants:', data);
-        //data.forEach((restaurant) => console.log('Restaurant category:', restaurant.category));
       })
       .catch((error) => console.error('Error fetching restaurants:', error));
   }, []);
@@ -43,7 +41,6 @@ const OrderPage = () => {
   useEffect(() => {
     // Fetch menu items for the selected restaurant
     if (selectedRestaurant) {
-      //console.log(`Fetching menu items for restaurant with ownerID: ${selectedRestaurant.ownerId}`);
       fetchMenuItems(selectedRestaurant.ownerId)
         .then((data) => setMenuItems(data.filter(item => item.ownerId === selectedRestaurant.ownerId)))
         .catch((error) => console.error(error));
@@ -53,14 +50,12 @@ const OrderPage = () => {
   useEffect(() => {
     // Filter restaurants based on the selected category
     if (selectedCategory) {
-      //console.log('Selected category:', selectedCategory);
       const filtered = selectedCategory._id === 'all'
         ? restaurants
         : restaurants.filter((restaurant) => {
             const restaurantCategory = restaurant.category || ''; // Ensure category is a string
             return restaurantCategory.trim().toLowerCase() === selectedCategory.name.trim().toLowerCase();
           });
-      //console.log('Filtered restaurants:', filtered);
       setFilteredRestaurants(filtered);
     }
   }, [selectedCategory, restaurants]);
@@ -74,54 +69,56 @@ const OrderPage = () => {
   };
 
   const handleCategoryClick = (category) => {
-    //console.log('Category clicked:', category);
     setSelectedCategory(category);
+  };
+
+  const handleOrderPreviewClose = () => {
+    setIsOrderPreviewOpen(false);
+  };
+
+  const handleOrderPreviewOpen = () => {
+    setIsOrderPreviewOpen(true);
+  };
+
+  const renderContent = () => {
+    if (isOrderPreviewOpen) {
+      return <OrderPreview onClose={handleOrderPreviewClose} />;
+    }
+
+    return selectedRestaurant ? (
+      <IndividualRestaurant
+        restaurant={selectedRestaurant}
+        menuItems={menuItems}
+        onBackClick={handleBackClick}
+      />
+    ) : (
+      <>
+        <SearchBar />
+        <h2 className="category-title">Choose From Popular Categories</h2>
+        <CategoryScroll
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryClick={handleCategoryClick}
+        />
+        <RestaurantList
+          restaurants={filteredRestaurants}
+          onRestaurantClick={handleRestaurantClick}
+        />
+      </>
+    );
   };
 
   return (
     <div className="order-page">
-      <OrderHeader />
+      <OrderHeader onOrderPreviewOpen={handleOrderPreviewOpen} />
       <div className="order-content">
         {!showOrderConfirmation ? (
           <>
-            <OrderPreview // This is just a placeholder 
-              orderTitle="Chicken Breast Salad"
-              carbohydrates={45}
-              carbohydratesCost={0}
-              proteins={50}
-              proteinsCost={3.1}
-              fats={20}
-              fatsCost={-1.25}
-              additionalNotes=""
-              subTotal={14.53}
-              deliveryFees={1.2}
-              serviceFees={2.2}
-              taxes={3.11}
-              total={21.04}
-              onCheckout={() => setShowOrderConfirmation(true)}
-            />
+            <div className="order-preview">
+              <OrderPreview onClose={handleOrderPreviewClose} />
+            </div>
             <div className="right-section">
-              {selectedRestaurant ? (
-                <IndividualRestaurant
-                  restaurant={selectedRestaurant}
-                  menuItems={menuItems}
-                  onBackClick={handleBackClick}
-                />
-              ) : (
-                <>
-                  <SearchBar />
-                  <h2 className="category-title">Choose From Popular Categories</h2>
-                  <CategoryScroll
-                    categories={categories}
-                    selectedCategory={selectedCategory}
-                    onCategoryClick={handleCategoryClick}
-                  />
-                  <RestaurantList
-                    restaurants={filteredRestaurants}
-                    onRestaurantClick={handleRestaurantClick}
-                  />
-                </>
-              )}
+              {renderContent()}
             </div>
           </>
         ) : (

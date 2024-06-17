@@ -1,114 +1,286 @@
+/* src/assets/styles/OrderConfirmation.css */
 .order-confirmation {
-    text-align: center;
-    padding: 20px;
-  }
-  
+  text-align: center;
+  padding: 20px;
+}
+
+.thank-you-text,
+.preparing-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  color: #302D40;
+}
+
+.redirect-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: #302D40;
+}
+
+.receipt-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  color: rgba(48, 45, 64, 0.5);
+}
+
+.enter-email {
+  text-decoration: underline;
+  color: #74DC91;
+  cursor: pointer;
+}
+
+.illustration-container {
+  position: relative;
+  margin: 20px 0;
+  margin-left: 60px;
+}
+
+.order-illustration {
+  width: 30%;
+  height: auto;
+}
+
+.emoji {
+  position: absolute;
+}
+
+.heart-emoji {
+  top: 10%;
+  left: 50%;
+  width: 4%;
+  height: auto;
+}
+
+.handsup-emoji {
+  top: 30%;
+  left: 40%;
+  width: 4%;
+  height: auto;
+}
+
+.loving-emoji {
+  top: 50%;
+  left: 55%;
+  width: 4%;
+  height: auto;
+}
+
+.lit-emoji {
+  top: 25%;
+  left: 60%;
+  width: 6%;
+  height: auto;
+}
+
+.surprised-emoji {
+  top: 70%;
+  left: 62%;
+  width: 4%;
+  height: auto;
+}
+
+.redirect-link {
+  color: #74DC91;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.redirect-link:hover {
+  color: #5cbf74;
+}
+
+/* Countdown Timer Styling */
+.countdown-timer {
+  margin: 20px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  color: #302D40;
+}
+
+.cancel-order-button {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-order-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-order-button:not(:disabled):hover {
+  background-color: #c9302c;
+}
+
+/* Order Status Styling */
+.order-status-item.order-confirmation {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  margin: 0 20px;
+}
+
+.order-status-item.order-confirmation:hover {
+  transform: scale(1.02);
+}
+
+.order-summary.order-confirmation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.order-summary.order-confirmation .food-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.order-summary.order-confirmation .details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.order-details.order-confirmation {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666666;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.order-details.order-confirmation p {
+  margin: 5px 0;
+}
+
+.order-status.order-confirmation {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 5px;
+  width: 100px;
+  text-align: center;
+}
+
+.order-status.in-progress.order-confirmation {
+  background-color: #f0ad4e;
+}
+
+.order-status.complete.order-confirmation {
+  background-color: #5cb85c;
+}
+
+.order-status.cancelled.order-confirmation {
+  background-color: #d9534f;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   .thank-you-text,
   .preparing-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-    color: #302D40;
-  }
-  
-  .receipt-text {
-    font-family: 'Poppins', sans-serif;
     font-size: 24px;
-    color: rgba(48, 45, 64, 0.5);
   }
-  
-  .enter-email {
-    text-decoration: underline;
-    color: #74DC91;
-    cursor: pointer;
+  .redirect-text {
+    font-size: 20px;
   }
-  
-  .illustration-container {
-    position: relative;
-    margin: 20px 0;
-    margin-left: 60px;
+  .receipt-text {
+    font-size: 18px;
   }
-  
+
   .order-illustration {
-    width: 30%;
-    height: auto;
+    width: 50%;
   }
-  
+
   .emoji {
-    position: absolute;
+    display: none;
   }
-  
-  .heart-emoji {
-    top: 10%;
-    left: 50%;
-    width: 4%;
-    height: auto;
+
+  .order-status-item.order-confirmation {
+    padding: 10px;
   }
-  
-  .handsup-emoji {
-    top: 30%;
-    left: 40%;
-    width: 4%;
-    height: auto;
+
+  .order-summary.order-confirmation {
+    font-size: 16px;
+    flex-wrap: wrap;
   }
-  
-  .loving-emoji {
-    top: 50%;
-    left: 55%;
-    width: 4%;
-    height: auto;
+
+  .order-details.order-confirmation {
+    font-size: 14px;
   }
-  
-  .lit-emoji {
-    top: 25%;
-    left: 60%;
-    width: 6%;
-    height: auto;
+
+  .cancel-order-button {
+    font-size: 16px;
+    padding: 8px 16px;
   }
-  
-  .surprised-emoji {
-    top: 70%;
-    left: 62%;
-    width: 4%;
-    height: auto;
+
+  .countdown-timer {
+    font-size: 18px;
   }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .thank-you-text,
-    .preparing-text {
-      font-size: 24px;
-    }
-  
-    .receipt-text {
-      font-size: 18px;
-    }
-  
-    .order-illustration {
-      width: 50%;
-    }
-  
-    .emoji {
-      display: none; /* Hide emojis on smaller screens */
-    }
+}
+
+@media (max-width: 480px) {
+  .thank-you-text,
+  .preparing-text {
+    font-size: 20px;
   }
-  
-  @media (max-width: 480px) {
-    .thank-you-text,
-    .preparing-text {
-      font-size: 20px;
-    }
-  
-    .receipt-text {
-      font-size: 16px;
-    }
-  
-    .order-illustration {
-      width: 70%;
-    }
-  
-    .emoji {
-      display: none; /* Ensure emojis are hidden on mobile devices */
-    }
+  .redirect-text {
+    font-size: 18px;
   }
-  
+
+  .receipt-text {
+    font-size: 16px;
+  }
+
+  .order-illustration {
+    width: 70%;
+  }
+
+  .emoji {
+    display: none;
+  }
+
+  .order-status-item.order-confirmation {
+    padding: 8px;
+  }
+
+  .order-summary.order-confirmation {
+    font-size: 14px;
+  }
+
+  .order-details.order-confirmation {
+    font-size: 12px;
+  }
+
+  .cancel-order-button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .countdown-timer {
+    font-size: 16px;
+  }
+}

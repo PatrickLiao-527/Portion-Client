@@ -35,11 +35,14 @@ h3 {
 
 .order-status-item {
   background: #FFFFFF;
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 12px;
+  padding: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left; /* Align text to the left */
 }
 
 .order-status-item:hover {
@@ -52,23 +55,30 @@ h3 {
   align-items: center;
   font-size: 18px;
   font-weight: 500;
+  border-bottom: 1px solid #ddd; /* Add a bottom border */
+  padding-bottom: 10px;
 }
 
 .order-summary .food-status {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
 }
 
 .order-summary .details {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  width: 50%;
 }
 
 .order-details {
   margin-top: 10px;
   font-size: 16px;
   color: #666666;
+  border-top: 1px solid #ddd; /* Add a top border */
+  padding-top: 10px;
 }
 
 .order-details p {
@@ -111,10 +121,13 @@ h3 {
   color: #fff;
   font-weight: 600;
   margin-top: 5px; /* Add margin to align with the food name */
+  width: 100px; /* Set a fixed width for consistency */
+  text-align: center; /* Center the text */
 }
 
 .order-status.in-progress {
   background-color: #f0ad4e; /* Yellow background */
+  text-align: start;
 }
 
 .order-status.complete {
@@ -130,11 +143,10 @@ h3 {
     padding: 16px;
   }
 
-  h1 {
+  .currnet-orders h1 {
     font-size: 24px;
   }
-
-  h2 {
+  .current-orders h2 {
     font-size: 20px;
   }
 
@@ -153,11 +165,11 @@ h3 {
     padding: 12px;
   }
 
-  h1 {
+  .currnet-orders h1 {
     font-size: 20px;
   }
 
-  h2 {
+  .currnet-orders h2 {
     font-size: 18px;
   }
 

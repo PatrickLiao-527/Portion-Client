@@ -119,27 +119,31 @@ const FoodItemCard = ({ foodItem, handleOrder }) => {
   const [additionalCarbs, setAdditionalCarbs] = useState(0);
   const [additionalProteins, setAdditionalProteins] = useState(0);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [warningMessage, setWarningMessage] = useState('');
 
   const handleMacroChange = (macro, value) => {
     if (macro === 'carbohydrates') {
-      setAdditionalCarbs((prev) => {
-        const newValue = prev + value;
-        return newValue < 0 ? 0 : newValue;
-      });
+      if (macros.carbohydrates === 0 && value < 0) {
+        setWarningMessage('Carbohydrates cannot be less than 0.');
+        return;
+      }
+      setAdditionalCarbs((prev) => prev + value);
       setMacros((prevState) => ({
         ...prevState,
-        carbohydrates: prevState.carbohydrates + value < 0 ? 0 : prevState.carbohydrates + value,
+        carbohydrates: Math.max(prevState.carbohydrates + value, 0),
       }));
     } else if (macro === 'proteins') {
-      setAdditionalProteins((prev) => {
-        const newValue = prev + value;
-        return newValue < 0 ? 0 : newValue;
-      });
+      if (macros.proteins === 0 && value < 0) {
+        setWarningMessage('Proteins cannot be less than 0.');
+        return;
+      }
+      setAdditionalProteins((prev) => prev + value);
       setMacros((prevState) => ({
         ...prevState,
-        proteins: prevState.proteins + value < 0 ? 0 : prevState.proteins + value,
+        proteins: Math.max(prevState.proteins + value, 0),
       }));
     }
+    setWarningMessage('');
   };
 
   const calculatePrice = () => {
@@ -242,6 +246,7 @@ const FoodItemCard = ({ foodItem, handleOrder }) => {
             </div>
           </div>
         </div>
+        {warningMessage && <p className="warning-message">{warningMessage}</p>}
       </div>
     </div>
   );
