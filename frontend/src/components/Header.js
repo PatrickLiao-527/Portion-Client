@@ -15,7 +15,6 @@ const Header = ({ onSignUpClick, onLoginClick }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  const { cartItems } = useCart();
 
   useEffect(() => {
     const path = location.pathname;

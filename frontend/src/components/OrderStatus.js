@@ -4,7 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { WebSocketContext } from '../contexts/WebSocketContext';
 import '../assets/styles/OrderStatus.css';
 
-const OrderStatus = ({ displayCount }) => {
+const OrderStatus = ({ displayCount, showTitle = true }) => {
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
   const { user } = useContext(AuthContext);
@@ -60,44 +60,40 @@ const OrderStatus = ({ displayCount }) => {
 
   return (
     <div className="order-status-container">
-      {displayCount && (
-        <div className="current-orders">
-          <h2>Current Orders</h2>
-          <div className="order-list">
-            {currentOrders.length > 0 ? (
-              currentOrders.map((order) => {
-                const { notes, pickupTime } = parseDetails(order.details);
-                return (
-                  <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
-                    <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
-                      <div className="food-status">
-                        <h2>{order.mealName}</h2>
-                        <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
-                      </div>
-                      <div className="details">
-                        <p><strong>Pickup Time:</strong> {pickupTime}</p>
-                        <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
-                      </div>
-                    </div>
-                    {expandedOrders[order._id] && (
-                      <div className="order-details">
-                        <p><strong>Notes:</strong> {notes}</p>
-                        <p><strong>Carbs:</strong> {order.carbs}g</p>
-                        <p><strong>Proteins:</strong> {order.proteins}g</p>
-                        <p><strong>Fats:</strong> {order.fats}g</p>
-                        <p><strong>Payment Type:</strong> {order.paymentType}</p>
-                        <p><strong>Order Time:</strong> {new Date(order.time).toLocaleString()}</p>
-                      </div>
-                    )}
+      {showTitle && <h2>Current Orders</h2>}
+      <div className="order-list">
+        {currentOrders.length > 0 ? (
+          currentOrders.map((order) => {
+            const { notes, pickupTime } = parseDetails(order.details);
+            return (
+              <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
+                <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
+                  <div className="food-status">
+                    <h2>{order.mealName}</h2>
+                    <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
                   </div>
-                );
-              })
-            ) : (
-              <p className="no-orders">No current orders found</p>
-            )}
-          </div>
-        </div>
-      )}
+                  <div className="details">
+                    <p><strong>Pickup Time:</strong> {pickupTime}</p>
+                    <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
+                  </div>
+                </div>
+                {expandedOrders[order._id] && (
+                  <div className="order-details">
+                    <p><strong>Notes:</strong> {notes}</p>
+                    <p><strong>Carbs:</strong> {order.carbs}g</p>
+                    <p><strong>Proteins:</strong> {order.proteins}g</p>
+                    <p><strong>Fats:</strong> {order.fats}g</p>
+                    <p><strong>Payment Type:</strong> {order.paymentType}</p>
+                    <p><strong>Order Time:</strong> {new Date(order.time).toLocaleString()}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          <p className="no-orders">No current orders found</p>
+        )}
+      </div>
     </div>
   );
 };

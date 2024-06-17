@@ -5,7 +5,7 @@
 }
 
 .thank-you-text,
-.preparing-text{
+.preparing-text {
   font-family: 'Poppins', sans-serif;
   font-size: 40px;
   font-weight: bold;
@@ -91,6 +91,36 @@
   color: #5cbf74;
 }
 
+/* Countdown Timer Styling */
+.countdown-timer {
+  margin: 20px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  color: #302D40;
+}
+
+.cancel-order-button {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-order-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-order-button:not(:disabled):hover {
+  background-color: #c9302c;
+}
+
 /* Order Status Styling */
 .order-status-item.order-confirmation {
   background: #FFFFFF;
@@ -171,7 +201,7 @@
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .thank-you-text,
-  .preparing-text{
+  .preparing-text {
     font-size: 24px;
   }
   .redirect-text {
@@ -201,11 +231,20 @@
   .order-details.order-confirmation {
     font-size: 14px;
   }
+
+  .cancel-order-button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .countdown-timer {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
   .thank-you-text,
-  .preparing-text{
+  .preparing-text {
     font-size: 20px;
   }
   .redirect-text {
@@ -234,5 +273,14 @@
 
   .order-details.order-confirmation {
     font-size: 12px;
+  }
+
+  .cancel-order-button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .countdown-timer {
+    font-size: 16px;
   }
 }
