@@ -114,10 +114,8 @@ const OrderPage = () => {
       <div className="order-content">
         {!showOrderConfirmation ? (
           <>
-            <div className="order-preview-desktop">
-              <OrderPreview 
-                onCheckout={() => setShowOrderConfirmation(true)}
-              />
+            <div className="order-preview">
+              <OrderPreview onClose={handleOrderPreviewClose} />
             </div>
             <div className="right-section">
               {renderContent()}
@@ -127,11 +125,6 @@ const OrderPage = () => {
           <OrderConfirmation />
         )}
       </div>
-      {isOrderPreviewOpen && (
-        <div className="order-preview-mobile">
-          <OrderPreview onClose={handleOrderPreviewClose} />
-        </div>
-      )}
     </div>
   );
 };

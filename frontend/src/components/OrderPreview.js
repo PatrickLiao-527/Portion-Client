@@ -307,9 +307,11 @@ const OrderPreview = ({ onClose }) => {
       <div className="order-preview-desktop">
         {renderOrderPreview()}
       </div>
-      <div className="order-preview-mobile">
-        {renderOrderPreview()}
-      </div>
+      {cartItems.length > 0 && (
+        <div className="order-preview-mobile">
+          {renderOrderPreview()}
+        </div>
+      )}
       {isSignupModalOpen && (
         <SignupWithEmail
           onClose={() => setIsSignupModalOpen(false)}

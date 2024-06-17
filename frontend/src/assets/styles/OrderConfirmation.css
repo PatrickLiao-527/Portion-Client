@@ -1,3 +1,4 @@
+/* src/assets/styles/OrderConfirmation.css */
 .order-confirmation {
   text-align: center;
   padding: 20px;
@@ -10,6 +11,7 @@
   font-weight: bold;
   color: #302D40;
 }
+
 .redirect-text {
   font-family: 'Poppins', sans-serif;
   font-size: 30px;
@@ -89,6 +91,83 @@
   color: #5cbf74;
 }
 
+/* Order Status Styling */
+.order-status-item.order-confirmation {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  margin: 0 20px;
+}
+
+.order-status-item.order-confirmation:hover {
+  transform: scale(1.02);
+}
+
+.order-summary.order-confirmation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.order-summary.order-confirmation .food-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.order-summary.order-confirmation .details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.order-details.order-confirmation {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666666;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.order-details.order-confirmation p {
+  margin: 5px 0;
+}
+
+.order-status.order-confirmation {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 5px;
+  width: 100px;
+  text-align: center;
+}
+
+.order-status.in-progress.order-confirmation {
+  background-color: #f0ad4e;
+}
+
+.order-status.complete.order-confirmation {
+  background-color: #5cb85c;
+}
+
+.order-status.cancelled.order-confirmation {
+  background-color: #d9534f;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .thank-you-text,
@@ -107,7 +186,20 @@
   }
 
   .emoji {
-    display: none; /* Hide emojis on smaller screens */
+    display: none;
+  }
+
+  .order-status-item.order-confirmation {
+    padding: 10px;
+  }
+
+  .order-summary.order-confirmation {
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+
+  .order-details.order-confirmation {
+    font-size: 14px;
   }
 }
 
@@ -129,6 +221,18 @@
   }
 
   .emoji {
-    display: none; /* Ensure emojis are hidden on mobile devices */
+    display: none;
+  }
+
+  .order-status-item.order-confirmation {
+    padding: 8px;
+  }
+
+  .order-summary.order-confirmation {
+    font-size: 14px;
+  }
+
+  .order-details.order-confirmation {
+    font-size: 12px;
   }
 }

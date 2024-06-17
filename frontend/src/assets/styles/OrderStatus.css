@@ -143,11 +143,10 @@ h3 {
     padding: 16px;
   }
 
-  h1 {
+  .currnet-orders h1 {
     font-size: 24px;
   }
-
-  h2 {
+  .current-orders h2 {
     font-size: 20px;
   }
 
@@ -166,11 +165,11 @@ h3 {
     padding: 12px;
   }
 
-  h1 {
+  .currnet-orders h1 {
     font-size: 20px;
   }
 
-  h2 {
+  .currnet-orders h2 {
     font-size: 18px;
   }
 

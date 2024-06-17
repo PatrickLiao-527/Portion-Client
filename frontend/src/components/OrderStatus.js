@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { fetchUserOrders } from '../services/api'; 
-import { AuthContext } from '../contexts/AuthContext'; 
+import { fetchUserOrders } from '../services/api';
+import { AuthContext } from '../contexts/AuthContext';
 import { WebSocketContext } from '../contexts/WebSocketContext';
 import '../assets/styles/OrderStatus.css';
 
-const OrderStatus = () => {
+const OrderStatus = ({ displayCount }) => {
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
-  const { user } = useContext(AuthContext); // Access user context
-  const { notifications } = useContext(WebSocketContext); // Access WebSocket notifications
+  const { user } = useContext(AuthContext);
+  const { notifications } = useContext(WebSocketContext);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -54,96 +54,50 @@ const OrderStatus = () => {
     return { notes, pickupTime };
   };
 
-  const isOrderRecent = (order) => {
-    if (order.status === 'Complete') {
-      const oneHourAgo = new Date(new Date().getTime() - 60 * 60 * 1000);
-      return new Date(order.time) > oneHourAgo;
-    }
-    return true;
-  };
-
   const sortedOrders = orders.sort((a, b) => new Date(b.time) - new Date(a.time));
-  const currentOrders = sortedOrders.filter(order => order.status === 'In Progress' || isOrderRecent(order));
-  const pastOrders = sortedOrders.filter(order => order.status !== 'In Progress' && !isOrderRecent(order));
+  const currentOrders = sortedOrders.slice(0, displayCount).filter(order => order.status === 'In Progress' || new Date(order.time) > new Date(new Date().getTime() - 60 * 60 * 1000));
+  const pastOrders = sortedOrders.slice(displayCount).filter(order => order.status !== 'In Progress' && new Date(order.time) <= new Date(new Date().getTime() - 60 * 60 * 1000));
 
   return (
     <div className="order-status-container">
-      <h1>Order Status</h1>
-      <div className="current-orders">
-        <h2>Current Orders</h2>
-        <div className="order-list">
-          {currentOrders.length > 0 ? (
-            currentOrders.map((order) => {
-              const { notes, pickupTime } = parseDetails(order.details);
-              return (
-                <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
-                  <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
-                    <div className="food-status">
-                      <h2>{order.mealName}</h2>
-                      <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
+      {displayCount && (
+        <div className="current-orders">
+          <h2>Current Orders</h2>
+          <div className="order-list">
+            {currentOrders.length > 0 ? (
+              currentOrders.map((order) => {
+                const { notes, pickupTime } = parseDetails(order.details);
+                return (
+                  <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
+                    <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
+                      <div className="food-status">
+                        <h2>{order.mealName}</h2>
+                        <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
+                      </div>
+                      <div className="details">
+                        <p><strong>Pickup Time:</strong> {pickupTime}</p>
+                        <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
+                      </div>
                     </div>
-                    <div className="details">
-                      <p><strong>Pickup Time:</strong> {pickupTime}</p>
-                      <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
-                    </div>
+                    {expandedOrders[order._id] && (
+                      <div className="order-details">
+                        <p><strong>Notes:</strong> {notes}</p>
+                        <p><strong>Carbs:</strong> {order.carbs}g</p>
+                        <p><strong>Proteins:</strong> {order.proteins}g</p>
+                        <p><strong>Fats:</strong> {order.fats}g</p>
+                        <p><strong>Payment Type:</strong> {order.paymentType}</p>
+                        <p><strong>Order Time:</strong> {new Date(order.time).toLocaleString()}</p>
+                      </div>
+                    )}
                   </div>
-                  {expandedOrders[order._id] && (
-                    <div className="order-details">
-                      <p><strong>Notes:</strong> {notes}</p>
-                      <p><strong>Carbs:</strong> {order.carbs}g</p>
-                      <p><strong>Proteins:</strong> {order.proteins}g</p>
-                      <p><strong>Fats:</strong> {order.fats}g</p>
-                      <p><strong>Payment Type:</strong> {order.paymentType}</p>
-                      <p><strong>Order Time:</strong> {new Date(order.time).toLocaleString()}</p>
-                    </div>
-                  )}
-                </div>
-              );
-            })
-          ) : (
-            <p className="no-orders">No current orders found</p>
-          )}
+                );
+              })
+            ) : (
+              <p className="no-orders">No current orders found</p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="past-orders">
-        <h2>Past Orders</h2>
-        <div className="order-list">
-          {pastOrders.length > 0 ? (
-            pastOrders.map((order) => {
-              const { notes } = parseDetails(order.details);
-              const orderDate = new Date(order.time);
-              const orderDateString = orderDate.toLocaleDateString();
-              const orderDay = orderDate.toLocaleDateString('en-US', { weekday: 'long' });
-              return (
-                <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
-                  <div className="order-summary" onClick={() => handleToggleExpand(order._id)}>
-                    <div className="food-status">
-                      <h3>{order.mealName}</h3>
-                      <p className={`order-status ${order.status.toLowerCase().replace(' ', '-')}`}>{order.status}</p>
-                    </div>
-                    <div className="details">
-                      <p><strong>Order Date:</strong> {orderDateString} ({orderDay})</p>
-                      <p><strong>Amount:</strong> ${order.amount.toFixed(2)}</p>
-                    </div>
-                  </div>
-                  {expandedOrders[order._id] && (
-                    <div className="order-details">
-                      <p><strong>Notes:</strong> {notes}</p>
-                      <p><strong>Carbs:</strong> {order.carbs}g</p>
-                      <p><strong>Proteins:</strong> {order.proteins}g</p>
-                      <p><strong>Fats:</strong> {order.fats}g</p>
-                      <p><strong>Payment Type:</strong> {order.paymentType}</p>
-                      <p><strong>Order Time:</strong> {orderDateString} ({orderDay})</p>
-                    </div>
-                  )}
-                </div>
-              );
-            })
-          ) : (
-            <p className="no-orders">No past orders found</p>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
