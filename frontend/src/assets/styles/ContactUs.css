@@ -147,17 +147,21 @@
 }
 
 .radio-group {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates two equal columns */
+  gap: 10px; /* Adjust gap between radio buttons as needed */
 }
 
 .radio-group label {
+  display: flex;
+  align-items: center;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
-  margin-right: 10px;
+  line-height: 1.2; /* Adjust line height for better readability */
+  white-space: normal; /* Ensure text wraps if needed */
+  word-wrap: break-word; /* Break words if they are too long */
 }
 
 .send-button {
@@ -204,6 +208,9 @@
 
   .form-group {
     width: 100%;
+  }
+  .radio-group {
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }

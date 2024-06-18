@@ -151,13 +151,13 @@ const FoodItemCard = ({ foodItem, handleOrder }) => {
     const proteinsPrice = foodItem.proteinsPrice || 0;
 
     const price = (macros.carbohydrates * carbsPrice) + (macros.proteins * proteinsPrice);
-    console.log('Carbs Price:', carbsPrice, 'Proteins Price:', proteinsPrice, 'Calculated Price:', price);
+    //console.log('Carbs Price:', carbsPrice, 'Proteins Price:', proteinsPrice, 'Calculated Price:', price);
     return price.toFixed(2);
   };
 
   const calculateCalories = () => {
     const calories = (macros.carbohydrates * 4) + (macros.proteins * 4) + (macros.fats * 9);
-    console.log('Calculated Calories:', calories);
+    //console.log('Calculated Calories:', calories);
     return calories;
   };
 

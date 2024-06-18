@@ -172,4 +172,25 @@ export const fetchUserOrders = async (email) => {
     console.error('Error fetching user orders:', error);
     throw error;
   }
+  
 };
+export const cancelOrder = async (orderId) => { // here we are not deleting the order element, we are simply changing the status of the order 
+  try {
+    const response = await fetch(`${BASE_URL}/orders/${orderId}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: 'Cancelled' })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error cancelling order:', error);
+    throw error;
+  }
+};
+

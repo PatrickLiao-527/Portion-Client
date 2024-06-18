@@ -141,6 +141,24 @@ const ContactUs = () => {
                   onChange={handleChange}
                 /> Forgot Password
               </label>
+              <label>
+                <input
+                  type="radio"
+                  name="subject"
+                  value="Ordering issues"
+                  checked={formData.subject === 'Ordering Issues'}
+                  onChange={handleChange}
+                /> Ordering Issues
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="subject"
+                  value="Other Issues"
+                  checked={formData.subject === 'Other Issues'}
+                  onChange={handleChange}
+                /> Other Issues
+              </label>
             </div>
           </div>
           <div className="form-group">

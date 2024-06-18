@@ -1,4 +1,23 @@
-/* src/assets/styles/OrderConfirmation.css */
+/* Contact Us Text Styling */
+.contact-us-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #302D40;
+  margin-top: 20px;
+}
+
+.contact-us-link {
+  color: #74DC91;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.contact-us-link:hover {
+  color: #5cbf74;
+}
+
+/* Main Styling */
 .order-confirmation {
   text-align: center;
   padding: 20px;
@@ -240,6 +259,10 @@
   .countdown-timer {
     font-size: 18px;
   }
+
+  .contact-us-text {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -281,6 +304,10 @@
   }
 
   .countdown-timer {
+    font-size: 16px;
+  }
+
+  .contact-us-text {
     font-size: 16px;
   }
 }
