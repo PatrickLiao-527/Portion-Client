@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+:root {
+  --font: 'Poppins', sans-serif;
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .header-wrapper {
   display: flex;
   justify-content: space-between;
@@ -36,15 +46,21 @@
 }
 
 .nav-links a {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+  font-family: 'Poppins', sans-serif; /* Original font family */
+  font-weight: 600; /* Original font weight */
+  font-size: 1rem; /* Original font size */
   color: #302D40;
   text-decoration: none;
   position: relative;
   padding-bottom: 0.25rem;
   padding-top: 0.27rem;
   cursor: pointer;
+  transition: top 0.35s, box-shadow 0.4s; /* Added transition for smooth effect */
+}
+
+.nav-links a:hover {
+  top: -0.16em; /* Hover effect for new style */
+  box-shadow: 0 0.4rem 0 -0.2rem rgba(105, 199, 159, 0.7); /* Hover effect for new style */
 }
 
 .nav-links a::after {
@@ -69,9 +85,9 @@
 }
 
 .auth-button {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+  font-family: 'Poppins', sans-serif; /* Original font family */
+  font-weight: 600; /* Original font weight */
+  font-size: 1rem; /* Original font size */
   color: #302D40;
   border: none;
   background: none;
@@ -241,5 +257,4 @@
   .auth-button {
     font-size: 0.75rem;
   }
-
 }
