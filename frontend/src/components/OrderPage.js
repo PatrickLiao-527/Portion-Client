@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../assets/styles/OrderPage.css';
 import OrderHeader from './OrderHeader';
 import OrderPreview from './OrderPreview';
-import SearchBar from './SearchBar';
+//import SearchBar from './SearchBar';
 import CategoryScroll from './CategoryScroll';
 import RestaurantList from './RestaurantList';
 import IndividualRestaurant from './IndividualRestaurant';
@@ -93,7 +93,7 @@ const OrderPage = () => {
       />
     ) : (
       <>
-        <SearchBar />
+        {/*<SearchBar />*/}
         <h2 className="category-title">Choose From Popular Categories</h2>
         <CategoryScroll
           categories={categories}

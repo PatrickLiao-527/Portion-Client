@@ -92,14 +92,18 @@
 .signup-button {
   width: 416px;
   height: 64px;
-  border: none;
   border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  cursor: pointer;
+  border: 2px solid #111111; 
   background-color: #FFFFFF;
   color: #111111;
-  font-weight: 500;
-  font-size: 22px;
-  cursor: pointer;
-  margin-top: 20px;
+  margin-bottom: 12px;
   transition: background-color 0.3s, color 0.3s;
 }
 .success-button{

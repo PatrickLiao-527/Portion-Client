@@ -1,4 +1,3 @@
-/* src/assets/styles/OrderPreview.css */
 .order-preview {
   width: 100%;
   max-width: 400px;
@@ -124,14 +123,19 @@
 }
 
 .remove-button {
-  color: #302D40;
+  background-color: #302D40;
+  color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 17px;
   padding: 10px;
-  margin-right: -10px;
-  font-weight: 900;
-  text-align: end;
-  display: block;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+  background-color: #1f1f2d;
 }
 
 .time-period-select {
@@ -175,19 +179,60 @@
   margin: 10px 0;
 }
 
+.checkout-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .checkout-button {
-  background: #302D40;
-  color: #fff;
+  position: relative;
   border: none;
-  border-radius: 5px;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-size: 26px;
-  padding: 10px;
-  text-align: center;
-  display: block;
-  margin: 20px auto 0;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+}
+
+.checkout-button .checkout-button-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.checkout-button .checkout-button-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(to left, hsl(340deg 100% 16%) 0%, hsl(340deg 100% 32%) 8%, hsl(340deg 100% 32%) 92%, hsl(340deg 100% 16%) 100%);
+}
+
+.checkout-button .checkout-button-front {
+  display: block;
+  position: relative;
+  padding: 12px 27px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: white;
+  background: #302D40;
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
 }
 
 /* Styles for mobile modal */
@@ -247,6 +292,39 @@
   .order-preview-mobile {
     display: none;
   }
+  .checkout-button .checkout-button-front {
+    font-size: 1.25rem;
+    padding: 12px 42px;
+  }
+}
+
+.checkout-button:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.checkout-button:hover .checkout-button-front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.checkout-button:active .checkout-button-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.checkout-button:hover .checkout-button-shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.checkout-button:active .checkout-button-shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.checkout-button:focus:not(:focus-visible) {
+  outline: none;
 }
 
 @media (max-width: 768px) {
