@@ -159,9 +159,10 @@
   font-size: 14px;
   font-weight: 400;
   color: #000000;
-  line-height: 1.2; /* Adjust line height for better readability */
-  white-space: normal; /* Ensure text wraps if needed */
-  word-wrap: break-word; /* Break words if they are too long */
+  line-height: 1.2; 
+  white-space: normal; 
+  word-wrap: break-word; 
+  gap: 10px;
 }
 
 .send-button {

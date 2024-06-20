@@ -1,12 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { loginUser } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
-import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import '../assets/styles/LoginModal.css';
 import logo from '../assets/images/Portion-Logo.png';
 import showHideIcon from '../assets/images/showHide_icon.png';
-
-const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const LoginModal = ({ onClose, onSignUpClick }) => {
   const [email, setEmail] = useState('');
@@ -68,12 +66,6 @@ const LoginModal = ({ onClose, onSignUpClick }) => {
     console.error('Google login error:', error);
   };
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: handleGoogleLoginSuccess,
-    onError: handleGoogleLoginFailure,
-    clientId: googleClientId,
-  });
-
   return (
     <div className="modal-overlay">
       <div className="modal-container login-container">
@@ -119,10 +111,19 @@ const LoginModal = ({ onClose, onSignUpClick }) => {
           <button type="submit" className="login-button">Log in</button>
         </form>
         <div className="login-divider">OR Continue with</div>
-        <button className="google-login-button" onClick={googleLogin}>
-          <img className = "google-logo"src="https://img.icons8.com/color/16/000000/google-logo.png" alt ="Google logo"/>
-          Continue with Google
-        </button>
+        <GoogleLogin
+          onSuccess={handleGoogleLoginSuccess}
+          onFailure={handleGoogleLoginFailure}
+          render={(renderProps) => (
+            <button 
+              className="google-login-button" 
+              onClick={renderProps.onClick} 
+              disabled={renderProps.disabled}
+            >
+              <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" className="google-logo" /> Continue with Google
+            </button>
+          )}
+        />
         <p className="signup-text">Don't have an account? <span className="link-text" onClick={() => { onSignUpClick(); onClose(); }}>Sign up</span></p>
       </div>
     </div>

@@ -201,7 +201,7 @@ const OrderPreview = ({ onClose }) => {
           <div key={index} className="order-item">
             <div className="order-preview-header">
               <h2>{item.foodItem}</h2>
-              <span
+              <button
                 className="remove-button"
                 onClick={() => {
                   removeItemFromCart(index);
@@ -209,7 +209,7 @@ const OrderPreview = ({ onClose }) => {
                 }}
               >
                 Remove
-              </span>
+              </button>
             </div>
             <div className="macro-nutrients">
               <div className="nutrient-column">
@@ -295,7 +295,13 @@ const OrderPreview = ({ onClose }) => {
           <span>Total</span>
           <span>${subTotal}</span>
         </div>
-        <button className="checkout-button" onClick={handleCheckout}>Order and checkout</button>
+        <div className="checkout-button-container">
+          <button className="checkout-button" onClick={handleCheckout} role="button">
+            <span className="checkout-button-shadow"></span>
+            <span className="checkout-button-edge"></span>
+            <span className="checkout-button-front text">Order and checkout</span>
+          </button>
+        </div>
         {warningMessage && <div className="warning-message">{warningMessage}</div>}
         {onClose && <span className="close-button" onClick={onClose}>&times;</span>}
       </div>

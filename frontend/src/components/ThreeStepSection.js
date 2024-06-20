@@ -60,7 +60,7 @@ const ThreeStepSection = () => {
       <img src={DownRightArrow} alt="Down Right Arrow" className="arrow downright-arrow" />
       <div className="row">
         <div className="text-section">
-          <button className="get-started-button" onClick={handleGetStartedClick}>Get Started With<br />Your First Order!</button>
+        <button class="get-started-button" onClick={handleGetStartedClick}>Get Started With<br />Your First Order!</button>
         </div>
         <div className="step step-3">
           <div className="step-content">

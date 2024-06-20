@@ -157,7 +157,8 @@ export const sendContactMessage = async (contactData) => {
 
 export const fetchUserOrders = async (email) => {
   try {
-    const response = await fetch(`${BASE_URL}/orders/customer/${email}`, {
+    console.log(`Fetching orders for email: ${email}`);
+    const response = await fetch(`${BASE_URL}/orders/customer/${encodeURIComponent(email)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -167,12 +168,12 @@ export const fetchUserOrders = async (email) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
+    console.log('User orders fetched successfully:', data);
     return data;
   } catch (error) {
     console.error('Error fetching user orders:', error);
     throw error;
   }
-  
 };
 export const cancelOrder = async (orderId) => { // here we are not deleting the order element, we are simply changing the status of the order 
   try {
