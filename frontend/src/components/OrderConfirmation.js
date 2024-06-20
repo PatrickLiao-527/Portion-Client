@@ -67,6 +67,7 @@ const OrderConfirmation = () => {
 
   return (
     <div className="order-confirmation">
+    
       <h1 className="thank-you-text">
         {isCancelled ? 'You have successfully cancelled your order' : 'Thank you for ordering with us!'}
       </h1>
@@ -74,7 +75,7 @@ const OrderConfirmation = () => {
         <img src={orderIllustration} alt="Order Illustration" className="order-illustration" />
       </div>
       <p className="preparing-text">
-        {isCancelled ? 'Were there any problems during your ordering? Please let us know!' : 'The restaurant is preparing your order.'}
+        {isCancelled ? 'Were there any problems during your ordering?' : 'The restaurant is preparing your order.'}
       </p>
       {isCancelled && (
         <p className="contact-us-text">
@@ -98,7 +99,7 @@ const OrderConfirmation = () => {
       )}
       {!isCancelled && (
         <p className="redirect-text">
-          You can <Link to="/order-status" className="redirect-link">check the status of your order here</Link>
+          View All Orders <Link to="/order-status" className="redirect-link">Here</Link>
         </p>
       )}
     </div>
