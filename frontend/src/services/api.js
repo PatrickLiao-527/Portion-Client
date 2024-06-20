@@ -52,12 +52,20 @@ export const fetchMenuItems = async (restaurantId) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
+    console.log('Fetched menu items:', data);
+
+    // Print out all the menu item's image paths
+    data.forEach(item => {
+      console.log(`Menu item: ${item.itemName}, Image path: ${item.imageUrl}`);
+    });
+
     return data;
   } catch (error) {
     console.error('Error fetching menu items:', error);
     throw error;
   }
 };
+
 
 export const createOrder = async (orderData) => {
   try {
@@ -134,6 +142,7 @@ export const loginUser = async (userData) => {
     throw error;
   }
 };
+
 export const sendContactMessage = async (contactData) => {
   try {
     const response = await fetch(`${BASE_URL}/contact`, {
@@ -152,7 +161,6 @@ export const sendContactMessage = async (contactData) => {
     console.error('Error sending contact message:', error);
     throw error;
   }
-  
 };
 
 export const fetchUserOrders = async (email) => {
@@ -175,7 +183,8 @@ export const fetchUserOrders = async (email) => {
     throw error;
   }
 };
-export const cancelOrder = async (orderId) => { // here we are not deleting the order element, we are simply changing the status of the order 
+
+export const cancelOrder = async (orderId) => {
   try {
     const response = await fetch(`${BASE_URL}/orders/${orderId}/status`, {
       method: 'PATCH',
@@ -194,4 +203,3 @@ export const cancelOrder = async (orderId) => { // here we are not deleting the 
     throw error;
   }
 };
-

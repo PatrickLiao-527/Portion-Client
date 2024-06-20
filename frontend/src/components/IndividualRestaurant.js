@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../assets/styles/IndividualRestaurant.css';
 import putInCartIcon from '../assets/images/shopping-cart_icon.png';
 import downArrowIcon from '../assets/images/Get-in-cart-down-arrow_icon.png';
 import backButtonIcon from '../assets/images/Back_button.png';
-import { createOrder } from '../services/api';
+import { createOrder, fetchMenuItems } from '../services/api';
 import { useCart } from '../contexts/CartContext';
 import HeartEmoji from '../assets/images/Heart_emoji.png';
 import HandsUpEmoji from '../assets/images/HandsUp_emoji.png';
@@ -13,11 +13,30 @@ import SurprisedEmoji from '../assets/images/Surprised_emoji.png';
 
 const emojis = [HeartEmoji, HandsUpEmoji, LovingEmoji, LitEmoji, SurprisedEmoji];
 
-const IndividualRestaurant = ({ restaurant, onBackClick, menuItems }) => {
+const IndividualRestaurant = ({ restaurant, onBackClick, restaurantId }) => {
+  const [menuItems, setMenuItems] = useState([]);
   const [floatingEmojis, setFloatingEmojis] = useState([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const emojiContainerRef = useRef(null);
   const { addItemToCart } = useCart();
+
+  useEffect(() => {
+    if (restaurantId) {
+      const fetchItems = async () => {
+        try {
+          const items = await fetchMenuItems(restaurantId);
+          setMenuItems(items);
+          console.log('Menu items with images:', items);
+        } catch (error) {
+          console.error('Error fetching menu items:', error);
+        }
+      };
+
+      fetchItems();
+    } else {
+      console.error('No restaurantId provided to IndividualRestaurant component.');
+    }
+  }, [restaurantId]);
 
   const handleOrder = (foodItem, macros, event) => {
     event.preventDefault();
@@ -151,13 +170,11 @@ const FoodItemCard = ({ foodItem, handleOrder }) => {
     const proteinsPrice = foodItem.proteinsPrice || 0;
 
     const price = (macros.carbohydrates * carbsPrice) + (macros.proteins * proteinsPrice);
-    //console.log('Carbs Price:', carbsPrice, 'Proteins Price:', proteinsPrice, 'Calculated Price:', price);
     return price.toFixed(2);
   };
 
   const calculateCalories = () => {
     const calories = (macros.carbohydrates * 4) + (macros.proteins * 4) + (macros.fats * 9);
-    //console.log('Calculated Calories:', calories);
     return calories;
   };
 
@@ -167,7 +184,8 @@ const FoodItemCard = ({ foodItem, handleOrder }) => {
     return { color: 'black' };
   };
 
-  const imageUrl = foodItem && foodItem.itemPicture ? foodItem.itemPicture : 'default_image_path_here';
+  const imageUrl = foodItem && foodItem.imageUrl ? `http://localhost:5555${foodItem.imageUrl}` : 'default_image_path_here';
+  console.log(`Rendering image for ${foodItem.itemName}: ${imageUrl}`);
 
   return (
     <div className="food-item">

@@ -41,7 +41,8 @@ const OrderPage = () => {
   useEffect(() => {
     // Fetch menu items for the selected restaurant
     if (selectedRestaurant) {
-      fetchMenuItems(selectedRestaurant.ownerId)
+      console.log('Selected Restaurant:', selectedRestaurant);
+      fetchMenuItems(selectedRestaurant._id)
         .then((data) => setMenuItems(data.filter(item => item.ownerId === selectedRestaurant.ownerId)))
         .catch((error) => console.error(error));
     }
@@ -90,6 +91,7 @@ const OrderPage = () => {
         restaurant={selectedRestaurant}
         menuItems={menuItems}
         onBackClick={handleBackClick}
+        restaurantId={selectedRestaurant.ownerId} // Pass the correct restaurantId here
       />
     ) : (
       <>
