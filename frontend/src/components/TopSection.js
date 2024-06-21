@@ -1,3 +1,4 @@
+// src/components/TopSection.js
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/TopSection.css';
@@ -30,12 +31,21 @@ const TopSection = () => {
     scrollElement(fatsRef, initialDelay + 4000);
 
     consoleText(
-      ['Order Meals', 'From Healthy Restaurants', 'That Fit Your Diet'],
+      [
+        'fits your diet',
+        'helps you lose weight',
+        'helps you build muscle',
+        'makes you fit',
+        'keeps you healthy',
+        'boosts your energy',
+        'improves your mood',
+        'supports your goals',
+        'fuels your day'
+      ],
       'text',
       ['#302D40']
     );
   }, []);
-
 
   function consoleText(words, id, colors) {
     if (colors === undefined) colors = ['#fff'];
@@ -47,7 +57,6 @@ const TopSection = () => {
     var target = document.getElementById(id)
     target.setAttribute('style', 'color:' + colors[0])
     window.setInterval(function() {
-  
       if (letterCount === 0 && waiting === false) {
         waiting = true;
         target.innerHTML = words[0].substring(0, letterCount)
@@ -77,10 +86,8 @@ const TopSection = () => {
       if (visible === true) {
         con.className = 'console-underscore hidden'
         visible = false;
-  
       } else {
         con.className = 'console-underscore'
-  
         visible = true;
       }
     }, 400)
@@ -90,6 +97,7 @@ const TopSection = () => {
     <div className="top-section">
       <div className="content">
         <div className="console-container">
+          <span className = "Title">Order Meals <br></br>From Healthy Restaurants that </span>
           <span id="text"></span>
           <div className="console-underscore" id="console">
             &#95;

@@ -114,15 +114,6 @@ const LoginModal = ({ onClose, onSignUpClick }) => {
         <GoogleLogin
           onSuccess={handleGoogleLoginSuccess}
           onFailure={handleGoogleLoginFailure}
-          render={(renderProps) => (
-            <button 
-              className="google-login-button" 
-              onClick={renderProps.onClick} 
-              disabled={renderProps.disabled}
-            >
-              <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" className="google-logo" /> Continue with Google
-            </button>
-          )}
         />
         <p className="signup-text">Don't have an account? <span className="link-text" onClick={() => { onSignUpClick(); onClose(); }}>Sign up</span></p>
       </div>
