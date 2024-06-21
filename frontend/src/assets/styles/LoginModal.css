@@ -82,12 +82,13 @@
   color: #666666;
 }
 
+
 .form-group-login input {
   width: 100%;
-  padding: 20px;
+  padding: 15px; /* Reduced padding */
   border-radius: 10px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
 .form-group-login input::placeholder {
@@ -165,7 +166,6 @@
 
   .login-button,
   .google-login-button {
-    width: 100%;
     height: 56px;
     font-size: 18px;
   }

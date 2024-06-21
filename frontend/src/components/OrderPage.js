@@ -12,7 +12,7 @@ import { fetchMenuItems, fetchCategories, fetchRestaurants } from '../services/a
 const OrderPage = () => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
-  const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
+  const [showOrderConfirmation] = useState(false);
   const [categories, setCategories] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
