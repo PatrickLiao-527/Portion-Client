@@ -189,8 +189,8 @@ const FoodItemCard = ({ foodItem, handleOrder }) => {
 
   return (
     <div className="food-item">
+      <img src={imageUrl} alt="Food" className="restaurant-food-image" />
       <div className="food-details">
-        <img src={imageUrl} alt="Food" className="restaurant-food-image" />
         <div className="food-texts-details">
           <h2 className="food-title">{foodItem ? foodItem.itemName : 'Food Item'}</h2>
           <div className="food-price-row">

@@ -88,7 +88,7 @@ const OrderConfirmation = () => {
         <img src={orderIllustration} alt="Order Illustration" className="order-illustration" />
       </div>
       <p className="preparing-text">
-        {isCancelled ? 'Were there any problems during your ordering?' : mostRecentOrder?.status === 'Complete' ? 'Your meal is ready!' : 'The restaurant is preparing your order.'}
+        {isCancelled ? 'Were there any problems during your ordering?' : 'The restaurant is preparing your order.'}
       </p>
       {isCancelled && (
         <p className="contact-us-text">
@@ -96,9 +96,9 @@ const OrderConfirmation = () => {
         </p>
       )}
       {!isCancelled && mostRecentOrder && (
-        <OrderStatus displayCount={1} showTitle={false} />
+        <OrderStatus displayCount={1} showTitle={false} showAllOrders={false} />
       )}
-      {!isCancelled && mostRecentOrder?.status !== 'Complete' && (
+      {!isCancelled && (
         <div className="countdown-timer">
           <p>Time left to cancel your order: {formatTime(timeLeft)}</p>
           <button
@@ -106,7 +106,7 @@ const OrderConfirmation = () => {
             onClick={handleCancelOrder}
             disabled={
               timeLeft === 0 || 
-              (mostRecentOrder && mostRecentOrder.status === 'Cancelled')
+              (mostRecentOrder && (mostRecentOrder.status === 'Complete' || mostRecentOrder.status === 'Cancelled'))
             }
           >
             Cancel Order

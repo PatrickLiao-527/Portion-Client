@@ -54,7 +54,8 @@ function App() {
           <Route path="/order" element={<OrderPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} /> 
-          <Route path="/order-status" element={<OrderStatus />} />
+          <Route path="/order-status" element={<OrderStatus displayCount={10} showAllOrders={true} />} />
+
         </Routes>
       </div>
     </Router>

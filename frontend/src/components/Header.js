@@ -5,7 +5,6 @@ import '../assets/styles/Header.css';
 import hamburgerIcon from '../assets/images/hamburger.svg';
 import logo from '../assets/images/Portion-Logo.png';
 import downArrowIcon from '../assets/images/chevronDown_icon.svg';
-import { useCart } from '../contexts/CartContext';
 
 const Header = ({ onSignUpClick, onLoginClick }) => {
   const location = useLocation();

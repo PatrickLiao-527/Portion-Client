@@ -4,7 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { WebSocketContext } from '../contexts/WebSocketContext';
 import '../assets/styles/OrderStatus.css';
 
-const OrderStatus = ({ displayCount, showTitle = true }) => {
+const OrderStatus = ({ displayCount, showTitle = true, showAllOrders = false }) => {
   const [orders, setOrders] = useState([]);
   const [expandedOrders, setExpandedOrders] = useState({});
   const { user } = useContext(AuthContext);
@@ -55,15 +55,15 @@ const OrderStatus = ({ displayCount, showTitle = true }) => {
   };
 
   const sortedOrders = orders.sort((a, b) => new Date(b.time) - new Date(a.time));
-  const currentOrders = sortedOrders.slice(0, displayCount).filter(order => order.status === 'In Progress' || new Date(order.time) > new Date(new Date().getTime() - 60 * 60 * 1000));
-  const pastOrders = sortedOrders.slice(displayCount).filter(order => order.status !== 'In Progress' && new Date(order.time) <= new Date(new Date().getTime() - 60 * 60 * 1000));
+  const currentOrders = sortedOrders.filter(order => order.status === 'In Progress' || new Date(order.time) > new Date(new Date().getTime() - 60 * 60 * 1000));
+  const ordersToDisplay = showAllOrders ? sortedOrders : currentOrders.slice(0, displayCount);
 
   return (
     <div className="order-status-container">
-      {showTitle && <h2>Current Orders</h2>}
+      {showTitle && <h2>{showAllOrders ? 'All Orders' : 'Current Orders'}</h2>}
       <div className="order-list">
-        {currentOrders.length > 0 ? (
-          currentOrders.map((order) => {
+        {ordersToDisplay.length > 0 ? (
+          ordersToDisplay.map((order) => {
             const { notes, pickupTime } = parseDetails(order.details);
             return (
               <div key={order._id} className={`order-status-item ${order.status.toLowerCase().replace(' ', '-')}`}>
@@ -91,7 +91,7 @@ const OrderStatus = ({ displayCount, showTitle = true }) => {
             );
           })
         ) : (
-          <p className="no-orders">No current orders found</p>
+          <p className="no-orders">No orders found</p>
         )}
       </div>
     </div>

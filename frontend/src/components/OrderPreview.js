@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { createOrder } from '../services/api';
-import SignupWithEmail from '../components/SignUpWithEmail';
-import LoginModal from '../components/LoginModal';
+import SignupWithEmail from './SignUpWithEmail';
+import LoginModal from './LoginModal';
 import '../assets/styles/OrderPreview.css';
 
 const OrderPreview = ({ onClose }) => {
@@ -21,18 +21,8 @@ const OrderPreview = ({ onClose }) => {
 
   useEffect(() => {
     if (cartItems.length > 0) {
-      const currentTime = new Date();
-      currentTime.setMinutes(currentTime.getMinutes() + 30);
-
-      const defaultHour = currentTime.getHours() % 12 || 12;
-      const defaultMinute = currentTime.getMinutes() >= 45 ? '45' : currentTime.getMinutes() >= 30 ? '30' : currentTime.getMinutes() >= 15 ? '15' : '00';
-      const defaultPeriod = currentTime.getHours() >= 12 ? 'PM' : 'AM';
-
-      setPickupTime({
-        hour: defaultHour.toString().padStart(2, '0'),
-        minute: defaultMinute,
-        period: defaultPeriod,
-      });
+      const defaultPickupTime = getDefaultPickupTime();
+      setPickupTime(defaultPickupTime);
     }
   }, [cartItems]);
 
@@ -41,6 +31,21 @@ const OrderPreview = ({ onClose }) => {
       setCartItemWarning('');
     }
   }, [cartItems]);
+
+  const getDefaultPickupTime = () => {
+    const currentTime = new Date();
+    currentTime.setMinutes(currentTime.getMinutes() + 30);
+
+    const defaultHour = currentTime.getHours() % 12 || 12;
+    const defaultMinute = currentTime.getMinutes() >= 45 ? '45' : currentTime.getMinutes() >= 30 ? '30' : currentTime.getMinutes() >= 15 ? '15' : '00';
+    const defaultPeriod = currentTime.getHours() >= 12 ? 'PM' : 'AM';
+
+    return {
+      hour: defaultHour.toString().padStart(2, '0'),
+      minute: defaultMinute,
+      period: defaultPeriod,
+    };
+  };
 
   const handleCheckout = async () => {
     if (cartItems.length >= 2) {
@@ -144,45 +149,11 @@ const OrderPreview = ({ onClose }) => {
   };
 
   const handleHourChange = (event) => {
-    let newHour = parseInt(event.target.value, 10);
-    let newPeriod = pickupTime.period;
-    if (event.target.value === '') {
-      setPickupTime({ ...pickupTime, hour: '' });
-      return;
-    }
-    if (newHour > 12) {
-      newHour = 1;
-      newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
-    } else if (newHour < 1) {
-      newHour = 12;
-      newPeriod = newPeriod === 'AM' ? 'PM' : 'AM';
-    }
-    setPickupTime({
-      ...pickupTime,
-      hour: newHour.toString().padStart(2, '0'),
-      period: newPeriod,
-    });
-    validatePickupTime(newHour.toString().padStart(2, '0'), pickupTime.minute, newPeriod);
+    handleTimeChange('hour', event.target.value);
   };
 
   const handleMinuteChange = (event) => {
-    let newMinute = parseInt(event.target.value, 10);
-    if (event.target.value === '') {
-      setPickupTime({ ...pickupTime, minute: '' });
-      return;
-    }
-    if (newMinute >= 60) {
-      newMinute = 0;
-      handleHourChange({ target: { value: (parseInt(pickupTime.hour, 10) + 1).toString().padStart(2, '0') } });
-    } else if (newMinute < 0) {
-      newMinute = 45;
-      handleHourChange({ target: { value: (parseInt(pickupTime.hour, 10) === 1 ? 12 : parseInt(pickupTime.hour, 10) - 1).toString().padStart(2, '0') } });
-    }
-    setPickupTime({
-      ...pickupTime,
-      minute: newMinute.toString().padStart(2, '0'),
-    });
-    validatePickupTime(pickupTime.hour, newMinute.toString().padStart(2, '0'), pickupTime.period);
+    handleTimeChange('minute', event.target.value);
   };
 
   const handleLoginClick = () => {
@@ -296,7 +267,7 @@ const OrderPreview = ({ onClose }) => {
           <span>${subTotal}</span>
         </div>
         <div className="checkout-button-container">
-          <button className="checkout-button" onClick={handleCheckout} role="button">
+          <button className="checkout-button" onClick={handleCheckout}>
             <span className="checkout-button-shadow"></span>
             <span className="checkout-button-edge"></span>
             <span className="checkout-button-front text">Order and checkout</span>
