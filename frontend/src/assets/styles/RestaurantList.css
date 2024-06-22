@@ -16,7 +16,7 @@
 
 .restaurant-image {
   width: 100%;
-  height: auto;
+  height: 240px;
   object-fit: cover;
   border-radius: 10px;
 }

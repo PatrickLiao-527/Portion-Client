@@ -1,5 +1,4 @@
-// src/components/ContactUs.js
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../assets/styles/ContactUs.css';
 import phoneIcon from '../assets/images/contact-us-phoneCall_icon.png'; 
@@ -104,10 +103,10 @@ const ContactUs = () => {
             <label>Email</label>
             <input
               type="email"
-              name="email"
-              placeholder="Enter your email address"
-              value={formData.email}
-              onChange={handleChange}
+                name="email"
+                placeholder="Enter your email address"
+                value={formData.email}
+                onChange={handleChange}
             />
           </div>
           <div className="form-group">
@@ -145,7 +144,7 @@ const ContactUs = () => {
                 <input
                   type="radio"
                   name="subject"
-                  value="Ordering issues"
+                  value="Ordering Issues"
                   checked={formData.subject === 'Ordering Issues'}
                   onChange={handleChange}
                 /> Ordering Issues

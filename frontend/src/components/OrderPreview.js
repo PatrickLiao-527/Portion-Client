@@ -5,6 +5,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { createOrder } from '../services/api';
 import SignupWithEmail from './SignUpWithEmail';
 import LoginModal from './LoginModal';
+import removeIcon from '../assets/images/remove.svg';
 import '../assets/styles/OrderPreview.css';
 
 const OrderPreview = ({ onClose }) => {
@@ -166,7 +167,7 @@ const OrderPreview = ({ onClose }) => {
     const totalCalories = cartItems.reduce((acc, item) => acc + item.calories, 0);
 
     return (
-      <div className="order-preview">
+      <div className="order-preview-title">
         <h1>Order Preview</h1>
         {cartItems.map((item, index) => (
           <div key={index} className="order-item">
@@ -179,7 +180,7 @@ const OrderPreview = ({ onClose }) => {
                   setCartItemWarning('');
                 }}
               >
-                Remove
+                <img src={removeIcon} alt="Remove" />
               </button>
             </div>
             <div className="macro-nutrients">
@@ -268,9 +269,7 @@ const OrderPreview = ({ onClose }) => {
         </div>
         <div className="checkout-button-container">
           <button className="checkout-button" onClick={handleCheckout}>
-            <span className="checkout-button-shadow"></span>
-            <span className="checkout-button-edge"></span>
-            <span className="checkout-button-front text">Order and checkout</span>
+            Place Order
           </button>
         </div>
         {warningMessage && <div className="warning-message">{warningMessage}</div>}

@@ -114,7 +114,7 @@
 .countdown-timer {
   margin: 20px 0;
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 13px;
   color: #302D40;
 }
 
@@ -124,11 +124,13 @@
   border: none;
   padding: 10px 20px;
   font-family: 'Poppins', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: -13px;
+  margin-bottom: 10px;
 }
 
 .cancel-order-button:disabled {

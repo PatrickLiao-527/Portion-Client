@@ -13,6 +13,7 @@ export const fetchRestaurants = async () => {
     }
 
     const data = await response.json();
+    console.log('Fetched restaurant data:', data); // Log the fetched data
     return data;
   } catch (error) {
     console.error('Error fetching restaurants:', error);

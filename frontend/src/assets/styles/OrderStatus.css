@@ -121,13 +121,12 @@ h3 {
   color: #fff;
   font-weight: 600;
   margin-top: 5px; /* Add margin to align with the food name */
-  width: 100px; /* Set a fixed width for consistency */
+  width: 150px; /* Set a fixed width for consistency */
   text-align: center; /* Center the text */
 }
 
 .order-status.in-progress {
   background-color: #f0ad4e; /* Yellow background */
-  text-align: start;
 }
 
 .order-status.complete {

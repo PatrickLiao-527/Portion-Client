@@ -1,6 +1,5 @@
 .order-header-wrapper {
-  width: 100%;
-  max-width: 1279px;
+  width: 80%;
   height: auto;
   background: linear-gradient(90deg, #78F4BF 0%, #C2EFB7 100%);
   border-radius: 1.25rem 1.25rem 0 0; /* 20px to rem */

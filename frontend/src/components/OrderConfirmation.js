@@ -100,8 +100,7 @@ const OrderConfirmation = () => {
       )}
       {!isCancelled && (
         <div className="countdown-timer">
-          <p>Time left to cancel your order: {formatTime(timeLeft)}</p>
-          <button
+                    <button
             className="cancel-order-button"
             onClick={handleCancelOrder}
             disabled={
@@ -111,13 +110,17 @@ const OrderConfirmation = () => {
           >
             Cancel Order
           </button>
+          <p>Time left to cancel your order: {formatTime(timeLeft)}</p>
+
         </div>
       )}
+      {/*
       {!isCancelled && (
         <p className="redirect-text">
           View All Orders <Link to="/order-status" className="redirect-link">Here</Link>
         </p>
       )}
+      */}
     </div>
   );
 };
