@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5555';
+const BASE_URL = 'http://107.175.133.12:5555';
 
 export const fetchRestaurants = async () => {
   try {
