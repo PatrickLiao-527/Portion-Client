@@ -1,4 +1,4 @@
-const BASE_URL = 'https://portion.food/api';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const fetchRestaurants = async () => {
   try {

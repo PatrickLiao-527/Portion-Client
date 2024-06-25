@@ -31,12 +31,14 @@
 
 .top-section-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #302D40;
   line-height: 1.2;
   margin: 4rem 0;
   text-align: start;
+  left:40%;
+  top: 20%;
 }
 
 @media (min-width: 601px) {
@@ -332,14 +334,15 @@
   }
 }
 
+/* Base Styles */
 .scrolling-text-container {
   overflow: hidden;
-  height: 80px;;
+  height: 76px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 120px;
-  margin-top: -75px;
+  margin-left: 10rem;
+  margin-top: -4.7rem;
 }
 
 .scrolling {
@@ -353,6 +356,19 @@
 
 .scrolling li {
   font-size: 4rem;
-  font-weight: inherit; 
-  color: inherit; 
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 600px) {
+  .scrolling-text-container {
+    margin-left: 4rem; /* Adjust margin-left for mobile */
+    margin-top: -1.8rem; /* Adjust margin-top for mobile */
+    height: 30px; /* Adjust height for mobile */
+  }
+
+  .scrolling li {
+    font-size: 1.5rem; /* Adjust font-size for mobile */
+  }
 }
